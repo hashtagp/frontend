@@ -5,7 +5,7 @@ import mug from "../../assets/mug-home.webp"
 import pens from "../../assets/pens-home.jpeg"
 import keychains from "../../assets/keychains-home.jpeg"
 import dairy from "../../assets/dairy-home.avif"
-import mobilestand from "../../assets/Mobile-stand-home.jpg"
+import mobilestand from "../../assets/mobile-stand-home.jpg"
 import penstand from "../../assets/pen-stand-home.jpeg"
 import Explore from '../../components/Explore';
 import om from "../../assets/om.svg"
