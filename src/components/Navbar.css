@@ -1,0 +1,212 @@
+.navbar {
+  background-color: white;
+  color: black;
+  padding: 10px 20px;
+  max-height: fit-content;
+  transition: smooth 0.3s;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* Allow wrapping for small screens */
+  background-color: white;
+}
+
+.logo {
+  background-color: white;
+  border: none;
+}
+
+.logo img {
+  width: 170px;
+  height: auto;
+}
+
+.nav-links {
+  cursor: pointer;
+  display: flex;
+  gap: 20px;
+  font-weight: bold;
+  background-color: white;
+}
+
+.nav-links li {
+  color: #2C2A2A;
+  font-family: 'cabin', sans-serif;
+  font-size: 24px;
+  padding: 10px;
+  transition: color 0.3s;
+  background-color: white;
+}
+
+.nav-links .active{
+  border-bottom: 2px solid #f4a261;
+}
+
+.mobile-menu li .active{
+  border-bottom: 2px solid #f4a261;
+}
+
+.nav-links li:hover {
+  color: #f4a261;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background-color: white;
+  position: relative; /* Add relative positioning */
+}
+
+.search-bar input[type="text"] {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 50px;
+  width: 100%;
+  outline: none;
+  background-color: white;
+}
+
+/* For Nav Icons */
+.nav-icons {
+  display: flex;
+  gap: 15px;
+  background-color: white;
+}
+
+.icon {
+  background-color: white;
+  font-size: 20px;
+  transition: color 0.3s;
+}
+
+.icon:hover {
+  color: #f4a261;
+}
+
+/* --- Responsive --- */
+
+/* Mobile View (for sm and below) */
+.hamburger-menu {
+  background: none;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  color: black;
+  background-color: white;
+}
+
+/* Mobile Menu Styles */
+.mobile-menu {
+  display: none; /* Hide mobile menu by default */
+  position: absolute;
+  top: 60px;
+  left: 0;
+  background-color: white;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+  z-index: 1000; /* Ensure it is above other elements */
+}
+
+.mobile-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mobile-menu li {
+  padding: 10px 0px;
+}
+
+.mobile-menu li a {
+  color: black;
+  font-family: 'cabin', sans-serif;
+  width: fit-content;
+  font-size: 24px;
+  padding: 10px 10px;
+  margin: auto;
+  text-decoration: none;
+  transition: color 0.3s;
+  display: block; /* Ensure full clickable area */
+}
+
+.mobile-menu li a:hover {
+  color: #f4a261;
+  background-color: #f0f0f0; /* Add hover background */
+}
+
+.search-results {
+  position: absolute;
+  top: 100%; /* Position just below the search bar */
+  left: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-results ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.search-results li {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+.search-results li:hover {
+  background-color: #f0f0f0;
+}
+
+.search-results li:last-child {
+  border-bottom: none;
+}
+
+/* Ensure Nav Items are hidden when on mobile */
+@media screen and (max-width: 1110px) {
+  .nav-links {
+    display: none; /* Hide nav links on mobile */
+  }
+
+  .navbar-container {
+    justify-content: space-between;
+  }
+
+  /* Show hamburger menu and mobile menu when screen size is less than 1110px */
+  .hamburger-menu {
+    display: block; /* Show the hamburger button on small screens */
+  }
+
+  .mobile-menu {
+    top: auto;
+    display: none; /* Hide mobile menu by default */
+  }
+
+  /* Show mobile menu when hamburger menu is clicked */
+  .mobile-menu.open {
+    display: block;
+  }
+
+  .sm\:hidden{
+    display: block;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  
+  .search-bar {
+    display: none;
+  }
+}

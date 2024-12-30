@@ -1,0 +1,59 @@
+.terms-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .terms-container *{
+    background-color: #fff;
+  }
+  
+  .terms-container header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .terms-container header h1 {
+    font-size: 32px;
+    color: #f66307;
+    margin-bottom: 10px;
+  }
+  
+  .terms-container header p {
+    font-size: 16px;
+    color: #666;
+  }
+  
+  .terms-container section h2 {
+    font-size: 24px;
+    color: #444;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #f66307;
+    display: inline-block;
+  }
+  
+  .terms-container section p,
+  .terms-container section ul {
+    margin: 15px 0;
+  }
+  
+  .terms-container section ul {
+    padding-left: 20px;
+    list-style: disc;
+  }
+  
+  .terms-container section ul li {
+    margin-bottom: 10px;
+  }
+  
+  .terms-container a {
+    color: #f66307;
+    text-decoration: none;
+  }
+  
+  .terms-container a:hover {
+    text-decoration: underline;
+  }

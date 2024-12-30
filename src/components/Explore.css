@@ -1,0 +1,110 @@
+.Products {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Ensures wrapping for smaller screens */
+    padding: 20px;
+    background-color: #fff;
+}
+
+.category {
+    width: 50%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: fit-content;
+    gap: 20px;
+    align-items: start;
+    justify-content: center; /* Center align the items horizontally */
+    background-color: #fff;
+}
+
+.product-c1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+    border-radius: 10px;
+    background-color: #f8f8f8;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.Product {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    height: 100%; /* Ensure full height */
+    width: 100%; /* Ensure full width */
+    border-radius: 10px;
+    background-color: #f8f8f8;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.Product img {
+    width: 80%;
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.bonsai img {
+    max-height: 450px;
+}
+
+.Product p {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+    font-weight: bold;
+    background-color: #f8f8f8;
+}
+
+.main {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.main-product {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.main-product img {
+    border-radius: 10px;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .Products {
+        flex-direction: column; /* Stack the elements vertically */
+        align-items: center;
+    }
+
+    .main {
+        width: 100%; /* Full width for small screens */
+        order: -1; /* Move .main to the top */
+    }
+
+    .category {
+        width: 100%; /* Full width for small screens */
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .bonsai img{
+        min-height: 260px;
+    }
+}

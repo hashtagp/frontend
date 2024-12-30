@@ -1,0 +1,306 @@
+/* Footer Styles */
+.footer {
+    background-color: #636466;
+    color: black;
+    border-radius: 10px;
+    margin-top: 20px;
+  }
+  
+  .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px 30px;
+    justify-content: space-around;
+    padding-top: 0px;
+    background-color: #636466;
+    gap: 30px;
+  }
+
+  .logo{
+    background-color: #636466;
+  }
+
+  .footer-logo{
+    background-color: #636466;
+  }
+
+  .footer-links{
+    background-color: #636466;
+    padding: 5px;
+  }
+
+  .footer-logo{
+    background-color: #636466;
+  }
+
+  .footer-logo{
+    background-color: #636466;
+  }
+
+  .footer-section,.footer-section p,.footer-section h3,.footer-section ul,.footer-section ul li,.footer-section ul li a{
+    background-color: #636466;
+  }
+  
+  .footer-logo img {
+    width: 300px;
+    height: 150px;
+    margin-bottom: 20px;
+  }
+  
+  .footer-links {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    width: 100%;
+  }
+
+  .footer-section{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    align-items: flex-start; /* Center vertically */
+  }
+  
+  .footer-section h3 {
+    text-align: left;
+    font-size: 20px;
+    font-family: 'Cabin', sans-serif;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #f68b20
+  }
+  
+  .footer-section p,
+  .footer-section ul {
+    font-size: 14px;
+    margin: 0;
+  }
+
+  .query {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align items to the start (left) */
+}
+
+.query h3{
+  color: #fff;
+  font-size: 20px;
+  font-family: 'Cabin', sans-serif;
+}
+
+.footer-search-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Adjust gap between input and button */
+    background-color: #636466;
+    width: 100%;
+}
+
+/* Make input and button appear on the same line */
+.footer-search-bar input[type="email"] {
+    padding: 5px;
+    padding-left: 20px;
+    font-size: 22px;
+    border: 1px solid #fff;
+    font-family: 'Cabin', sans-serif;
+    font-weight: 200;
+    border-radius: 25px;
+    color: #fff;
+    opacity: 0.6;
+    outline: none;
+    background-color: #636466;
+    width: 350px;
+}
+
+.submit-container {
+  display: flex;
+  align-items: center; /* Center vertically */
+  gap: 10px; /* Adjust spacing between button and message */
+  background-color: #636466;
+  margin-top: 10px;
+}
+
+/* Button Styling */
+.submit-container button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 25px;
+  font-size: 22px;
+  font-family: 'Cabin', sans-serif;
+  background-color: #fff;
+  color: black;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+/* Message Styling */
+.submit-container p {
+  margin: 0;
+  font-family: 'Cabin', sans-serif;
+  font-weight: 200;
+  font-size: 20px;
+  opacity: 0.6;
+  color: #ffffff;
+}
+
+.footer-section ul li{
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+  
+  .footer-section ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .footer-section p{
+    color:#fff;
+  }
+  
+  .footer-section ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 15px;
+    font-family: 'poppins', sans-serif;
+    transition: color 0.3s;
+  }
+  
+  .footer-section ul li a:hover {
+    color: #f4a261;
+  }
+  
+  .social-links {
+    text-align: left;
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .social-links li {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    background-color: #636466;
+  }
+
+  .social-links li svg{
+    background-color: #636466;
+    color: #fff;
+  }
+  
+  .footer-bottom {
+    padding: 20px;
+    background-color: #636466;
+    text-align: center;
+  }
+
+  .info{
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    background-color: #636466;
+    padding-top: 100px;
+  }
+  
+  .footer hr{
+    width: 95%;
+    margin: 0 auto;
+    border: 1px solid #fff;
+    opacity: 0.2;
+  }
+  
+  .footer-bottom p {
+    font-family: 'Cabin', sans-serif;
+    font-size: 20px;
+    color: #fff;
+    background-color: #636466;
+    text-shadow: 0px 4px 4px #000000;
+  }
+
+  .map{
+    border-radius: 15px;
+  }
+  
+  /* --- Responsive --- */
+  @media screen and (max-width: 1090px) {
+    .footer-container{
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: none;
+    }
+
+    .info{
+      padding-top: 10px;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .footer-container {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .footer-links {
+      flex-direction: column;
+      gap: 20px;
+      text-align: center;
+    }
+  
+    .footer-logo img {
+      width: 300px;
+    }
+
+    .info{
+      flex-direction: column;
+    }
+  }
+
+  @media screen and (max-width: 780px){
+    .info{
+      padding-top: 5px;
+      gap: 10px;
+    }
+
+    .footer-section ul li a {
+      font-size: 15px;
+    }
+
+    .footer-section h3 {
+      font-size: 20px;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .footer-logo img {
+      width: 300px;
+    }
+  
+    .footer-section h3 {
+      font-size: 16px;
+    }
+  
+    .footer-bottom {
+      padding: 15px;
+    }
+  
+    .footer-bottom p {
+      font-size: 12px;
+    }
+  }
+
+
+  @media screen and (max-width: 420px) {
+    .footer-search-bar input[type="email"] {
+      padding: 10px;
+      padding-left: 20px;
+      font-size: 22px;
+      border: 1px solid #fff;
+      font-family: 'Cabin', sans-serif;
+      font-weight: 200;
+      border-radius: 25px;
+      outline: none;
+      background-color: #636466;
+      width: 250px;
+  }
+  }
+  
