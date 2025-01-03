@@ -75,27 +75,27 @@ const Carousel = () => {
         <div className="explore-container">
           <div className="explore-card">
             <h3>Gift mugs</h3>
-            <img src={mug} alt="Gift mugs" />
+            <img onClick={()=>navigate("/products?category=Mug")} src={mug} alt="Gift mugs" />
           </div>
           <div className="explore-card">
             <h3>Pens</h3>
-            <img src={pens} alt="Pens" /> 
+            <img onClick={()=>navigate("/products?category=Pens")} src={pens} alt="Pens" /> 
           </div>
           <div className="explore-card">
             <h3>Key chains</h3>
-            <img src={keychains} alt="Key chains" /> 
+            <img onClick={()=>navigate("/products?category=Keychains")} src={keychains} alt="Key chains" /> 
           </div>
           <div className="explore-card">
             <h3>Personal dairy</h3>
-            <img src={dairy} alt="Personal dairy" /> 
+            <img onClick={()=>navigate("/products?category=Dairy")} src={dairy} alt="Personal dairy" /> 
           </div>
           <div className="explore-card">
             <h3>Mobile stand</h3>
-            <img src={mobilestand} alt="Mobile stand" /> 
+            <img onClick={()=>navigate("/products?category=Mobile-stand")} src={mobilestand} alt="Mobile stand" /> 
           </div>
           <div className="explore-card">
             <h3>Pen stand</h3>
-            <img src={penstand} alt="Pen stand" /> 
+            <img onClick={()=>navigate("/products?category=Pen-stand")} src={penstand} alt="Pen stand" /> 
           </div>
         </div>
         <button onClick={()=>navigate("/products")}>EXPLORE MORE</button>
