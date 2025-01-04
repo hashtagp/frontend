@@ -103,7 +103,7 @@ marquee {
 .badge img {
   background-color: transparent;
   height: 200px;
-  margin-left: 40%;
+  margin-left: 35%;
   margin-top: -25%;
 }
 
@@ -256,13 +256,14 @@ marquee {
 
 .explore-card h3 {
   color: #251B1B;
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-family: 'poppins', sans-serif;
   font-weight: 700;
   background-color: inherit;
 }
 
 .explore-card img {
+  margin: 0px auto;
   position: relative;
   object-fit: cover;
   border-radius: 15px;   

@@ -18,3 +18,8 @@
     border-radius: 10px;
     margin-top: 20px;
 }
+
+.main-content{
+    max-width: 1300px;
+    margin: 0 auto;
+}

@@ -10,10 +10,12 @@
     display: flex;
     flex-wrap: wrap;
     padding: 20px 30px;
-    justify-content: space-around;
+    justify-content: space-evenly;
     padding-top: 0px;
     background-color: #636466;
     gap: 30px;
+    max-width: 1300px;
+    margin:0 auto;
   }
 
   .logo{
@@ -42,7 +44,7 @@
   }
   
   .footer-logo img {
-    width: 300px;
+    width: 350px;
     height: 150px;
     margin-bottom: 20px;
   }
@@ -82,22 +84,23 @@
     align-items: flex-start; /* Align items to the start (left) */
 }
 
-.query h3{
+.query h2{
   color: #fff;
-  font-size: 20px;
+  font-size: 25px;
   font-family: 'Cabin', sans-serif;
 }
 
-.footer-search-bar {
+.footer-query {
     display: flex;
     align-items: center;
     gap: 8px; /* Adjust gap between input and button */
     background-color: #636466;
     width: 100%;
+    margin-top: 10px;
 }
 
 /* Make input and button appear on the same line */
-.footer-search-bar input[type="email"] {
+.query .footer-query input[type="email"] {
     padding: 5px;
     padding-left: 20px;
     font-size: 22px;
@@ -122,10 +125,10 @@
 
 /* Button Styling */
 .submit-container button {
-  padding: 5px 10px;
+  padding: 5px 20px;
   border: none;
   border-radius: 25px;
-  font-size: 22px;
+  font-size: 15px;
   font-family: 'Cabin', sans-serif;
   background-color: #fff;
   color: black;
@@ -138,7 +141,7 @@
   margin: 0;
   font-family: 'Cabin', sans-serif;
   font-weight: 200;
-  font-size: 20px;
+  font-size: 15px;
   opacity: 0.6;
   color: #ffffff;
 }

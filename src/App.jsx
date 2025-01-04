@@ -27,6 +27,7 @@ function App() {
       <div className="app">
         <Navbar />
         <ToastContainer />
+        <div className="main-content">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
@@ -46,6 +47,7 @@ function App() {
           <Route path="/return-policy" element={<ReturnPolicy />} />
           <Route path="*" element={<Home/>} />
         </Routes>
+        </div>
         <Footer />
       </div>
   );
