@@ -7,7 +7,7 @@
 }
 
 .category {
-    width: 50%;
+    width: 40%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     height: fit-content;
@@ -48,10 +48,6 @@
     margin-bottom: 10px;
 }
 
-/* .bonsai img {
-    max-height: 450px;
-} */
-
 .Product p {
     margin: 0;
     font-size: 14px;
@@ -61,29 +57,68 @@
 }
 
 .main {
-    width: 50%;
+    width: 100%;
+    height: 70vh;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
     background-color: #fff;
+    border-radius: 15px;
 }
 
-.main-product {
-    width: 100%;
-    height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+.hover-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the element perfectly */
+    background: rgba(0, 0, 0, 0.6); /* Transparent dark background for better readability */
+    color: #fff; /* White text for contrast */
+    padding: 30px; /* Generous padding for spacing */
+    border-radius: 15px; /* Smooth rounded corners */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Deeper shadow for a modern look */
+    text-align: center; /* Center align the text */
+    z-index: 1000; /* Ensure it appears above other elements */
+    font-family: 'Arial', sans-serif; /* Clean and modern font */
+    backdrop-filter: blur(10px); /* Subtle blur effect for the background */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Light border for definition */
 }
 
-.main-product img {
-    border-radius: 10px;
+.hover-message h1 {
+    font-size: 28px; /* Larger font size for the heading */
+    font-weight: 700; /* Bold font weight for emphasis */
+    margin-bottom: 10px; /* Add spacing below the heading */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Subtle text shadow for depth */
+}
+
+
+.image-container {
+    position: relative;
     width: 100%;
-    height: auto;
-    object-fit: cover;
+    height: 100%;
+    overflow: hidden;
+    border: 2px solid #ccc;
+    cursor: ew-resize;
+    border-radius: 15px;
+}
+
+.image {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+.image:first-child {
+    background-image: url('../assets/home-banner-with-logo.jpg');
+    clip-path: inset(0 100% 0 0);
+}
+
+.image:last-child {
+    background-image: url('../assets/home-banner-without-logo.jpg');
+    clip-path: inset(0 0 0 100%);
 }
 
 /* Responsive Design */
@@ -104,7 +139,7 @@
 }
 
 @media screen and (max-width: 768px) {
-    .bonsai img{
+    .bonsai img {
         min-height: 260px;
     }
 }

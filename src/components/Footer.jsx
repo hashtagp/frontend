@@ -28,7 +28,7 @@ const Footer = () => {
           </div>
           <div className="submit-container">
           <button>Submit</button>
-          <p>We will get back to you soon</p>
+          <p>We will get back to you soon !!</p>
           </div>
         </div>
 

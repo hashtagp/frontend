@@ -47,14 +47,14 @@ const Carousel = () => {
             <h1>Upgrade Your Wardrobe with Our Exclusive</h1>
             <h1>T-Shirts.</h1>
             <p>Customize Explore and Shop Now!</p>
-            <button>SHOP NOW</button>
+            <button onClick={()=>navigate("/products")}>SHOP NOW</button>
           </div>
         </div>
         <div className='badge'>
           <h1>Your Design,</h1>
           <h1>Your Badge</h1>
           <h1>PERSONALIZE IT!</h1>
-          <button>EXPLORE</button>
+          <button onClick={()=>navigate("/products")}>EXPLORE</button>
           <img src={badge} alt="" />
         </div>
       </div>
@@ -87,7 +87,7 @@ const Carousel = () => {
           </div>
           <div className="explore-card">
             <h3>Personal dairy</h3>
-            <img onClick={()=>navigate("/products?category=Dairy")} src={dairy} alt="Personal dairy" /> 
+            <img onClick={()=>navigate("/products?category=Diary")} src={dairy} alt="Personal dairy" /> 
           </div>
           <div className="explore-card">
             <h3>Mobile stand</h3>

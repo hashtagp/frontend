@@ -1,7 +1,7 @@
 .navbar {
   background-color: white;
   color: black;
-  padding: 10px 20px;
+  padding: 0px 20px;
   max-height: fit-content;
   transition: smooth 0.3s;
 }
@@ -15,13 +15,14 @@
 }
 
 .logo {
-  background-color: white;
+  background-color: transparent !important;
   border: none;
 }
 
 .logo img {
   width: 170px;
   height: auto;
+  background-color: transparent;
 }
 
 .nav-links {
@@ -62,7 +63,7 @@
 }
 
 .search-bar input[type="text"] {
-  padding: 8px;
+  padding: 8px 15px;
   font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 50px;
