@@ -23,3 +23,8 @@
     max-width: 1300px;
     margin: 0 auto;
 }
+
+.admin-content{
+    display: flex;
+    transition: 3ms smooth;
+  }

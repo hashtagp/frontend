@@ -1,4 +1,6 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { useContext } from "react";
+import { StoreContext } from "./context/StoreContext";
 import './App.css';
 import Navbar from './components/Navbar.jsx';
 import Signup from './pages/Signup/Signup.jsx';
@@ -22,18 +24,49 @@ import ReturnPolicy from "./pages/ReturnPolicy/ReturnPolicy.jsx";
 import Product from "./components/Product.jsx";
 import { ToastContainer } from 'react-toastify';
 
+//admin components
+import AdminLoginSignup from "../src/admin/pages/Login/AdminLoginSignup.jsx";
+import Add from "../src/admin/pages/Add/Add.jsx";
+import List from "../src/admin/pages/List/List.jsx";
+import Orders from "../src/admin/pages/Orders/Orders.jsx";
+import Sidebar from "../src/admin/components/Sidebar/Sidebar.jsx";
+import AdminNavbar from "./admin/components/Navbar/AdminNavbar.jsx";
+
 function App() {
+  const { token } = useContext(StoreContext); // Use the token from context
+  const location = useLocation(); // Get the current location
+
+  const isAdminRoute = location.pathname.startsWith("/admin");
+
+  if (isAdminRoute) {
+    return (
+      <div className="app-admin">
+        <AdminNavbar />
+        <div className="admin-content">
+        <Sidebar />
+          <Routes>
+            <Route path="/admin" element={<Add />} />
+            <Route path="/admin/add" element={<Add />} />
+            <Route path="/admin/list" element={<List />} />
+            <Route path="/admin/orders" element={<Orders />} />
+          </Routes>
+        </div>
+        {token ? null : <AdminLoginSignup />}
+      </div>
+    );
+  }
+else{
   return (
-      <div className="app">
-        <Navbar />
-        <ToastContainer />
-        <div className="main-content">
+    <div className="app">
+      <Navbar />
+      <ToastContainer />
+      <div className="main-content">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/products" element={<Products />} />
-          <Route path="/product/:productId" element={<Product/>} />
+          <Route path="/product/:productId" element={<Product />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
@@ -45,12 +78,13 @@ function App() {
           <Route path="/myOrders" element={<MyOrders />} />
           <Route path="/placeOrder" element={<PlaceOrder />} />
           <Route path="/return-policy" element={<ReturnPolicy />} />
-          <Route path="*" element={<Home/>} />
+          <Route path="*" element={<Home />} />
         </Routes>
-        </div>
-        <Footer />
       </div>
+      <Footer />
+    </div>
   );
+}
 }
 
 export default App;

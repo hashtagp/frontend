@@ -1,0 +1,57 @@
+/* Basic styling for the LoginSignup component */
+.admin-login-popup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+  
+  .admin-login-popup-container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    text-align: center;
+  }
+  
+  .admin-login-popup-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .admin-login-popup-container input[type="text"],
+  .admin-login-popup-container input[type="password"] {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .admin-login-popup-container button {
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background: linear-gradient(90deg, #1e3c72, #2a5298); /* Gradient background */
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .admin-login-popup-container button:hover {
+    background-color: #1e3c72;
+    transform: scale(1.05); /* Slightly enlarge on hover */
+  }
+  
+  /* Ensure toast notifications are above the blur effect */
+  .Toastify__toast-container {
+    z-index: 1100;
+  }
