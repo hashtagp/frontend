@@ -1,81 +1,155 @@
-import React, { useContext } from 'react'
-import './Orders.css'
-import axios from "axios"
-import { toast } from "react-toastify"
-import { useState } from 'react'
-import { useEffect } from 'react'
-import {assets} from "../../assets/admin_assets/assets"
-import { StoreContext } from '../../../context/StoreContext'
+import React, { useContext, useEffect, useState } from "react";
+import "./Orders.css";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { assets } from "../../assets/admin_assets/assets";
+import { StoreContext } from "../../../context/StoreContext";
 
 const Orders = () => {
+  const [orders, setOrders] = useState([]);
+  const { url, token } = useContext(StoreContext);
 
-  const [orders,setOrders]=useState([]);
-  const { url } = useContext(StoreContext);
-
-  const fetchAllOrders=async()=>{
-    const response=await axios.get(url+"/api/admin/orders/all",{headers:{Authorization:`Bearer ${token}`}});
-    if(response.data.success){
-      setOrders(response.data.data);
+  const fetchAllOrders = async () => {
+    if (!token) {
+      toast.error("Authorization token is missing");
+      return;
     }
-    else{
-      toast.error("Unexpected error")
+    try {
+      const response = await axios.get(`${url}/api/admin/orders/all`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (response.data.success && Array.isArray(response.data.orders)) {
+        setOrders(response.data.orders);
+      } else {
+        toast.error("Failed to fetch orders");
+      }
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+      toast.error("Failed to fetch orders");
     }
-  }
+  };
 
-
-  const statusHandler=async(event,orderId)=>{
-    const response=await axios.put(url+"/api/admin/orders/update",{
-      orderId,
-      status:event.target.value
-    },{headers:{Authorization:`Bearer ${token}`}});
-    if(response.data.success){
-      await fetchAllOrders();
+  const statusHandler = async (event, orderId) => {
+    try {
+      const response = await axios.put(
+        `${url}/api/admin/orders/update`,
+        {
+          orderId,
+          status: event.target.value,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      if (response.data.success) {
+        await fetchAllOrders();
+        toast.success("Order status updated");
+      } else {
+        toast.error("Failed to update status");
+      }
+    } catch (error) {
+      console.error("Error updating status:", error);
+      toast.error("Failed to update status");
     }
-  }
+  };
 
-  useEffect(()=>{
-    fetchAllOrders();
-  },[])
+  useEffect(() => {
+    if (token && url) {
+      fetchAllOrders();
+    }
+  }, [token, url]);
+
+  // Function to determine the available options for status based on dates
+  const getStatusOptions = (order) => {
+    if (order.deliveredDate) {
+      return <p>Order Delivered</p>; // If delivered, show "Order Delivered"
+    }
+    if (order.shippedDate) {
+      return (
+        <select
+          onChange={(event) => statusHandler(event, order._id)}
+          value={order.status || "Shipped"}
+        >
+          <option value="Delivered">Delivered</option>
+        </select>
+      ); // If shipped, show only "Delivered"
+    }
+    if (order.orderDate) {
+      return (
+        <select
+          onChange={(event) => statusHandler(event, order._id)}
+          value={order.status || "Ordered"}
+        >
+          <option value="Shipped">Shipped</option>
+          <option value="Delivered">Delivered</option>
+        </select>
+      ); // If ordered, show "Shipped" and "Delivered"
+    }
+    return null; // If no dates, return nothing
+  };
 
   return (
-    <div className='order add'>
+    <div className="order add">
       <h3>Order Page</h3>
       <div className="order-list">
-        {orders.slice().reverse().map((order,index)=>(
-          <div key={index} className='order-item'>
-            <img src={assets.parcel_icon} alt="" />
+        {orders.slice().reverse().map((order, index) => (
+          <div key={order._id || index} className="order-item">
+            <img src={assets.parcel_icon} alt="Order Parcel Icon" />
             <div>
-              <p className='order-item-food'>
-                {order.items.map((item,index)=>{
-                  if(index===order.items.length-1){
-                    return item.name+" X "+item.quantity
-                  }
-                  else{
-                    return item.name+" X "+item.quantity+", " 
-                  }
-                })}
+              <p className="order-item-food">
+                {order.items.map((item, idx) => (
+                  <span key={idx}>
+                    {item.name} x {item.quantity}
+                    {idx !== order.items.length - 1 ? ", " : ""}
+                  </span>
+                ))}
               </p>
-              <p className="order-item-name">{order.address.firstName+" "+order.address.lastName}</p>
+              <p className="order-item-name">
+                {order.address?.firstName || "N/A"}{" "}
+                {order.address?.lastName || ""}
+              </p>
               <div className="order-item-address">
-              <p >{order.address.block+", "}</p>
-              <p>{order.address.roomNo}</p>
-              {/* <p>{+", "+order.address.state+", "+order.address.country+", "+order.address.pincode}</p> */}
+                <p>{order.address?.street || "N/A"},</p>
+                <p>{order.address?.city || "N/A"}</p>
               </div>
-              <p className="order-item-phone">{order.address.phone}</p>
+              <div className="order-item-address">
+              <p>{order.address?.state || "N/A"}</p>
+              <p>{order.address?.postalCode || "N/A"}</p>
+              </div>
+              <p className="order-item-phone">{order.address?.phone || "N/A"}</p>
             </div>
             <p>Items: {order.items.length}</p>
-            <p>&#8377;{order.amount}</p>
-            <select onChange={(event)=>statusHandler(event,order._id)} value={order.status}>
-              <option value="filling happiness on a Plate">Filling happiness</option>
-              <option value="Reaching you">Reaching you</option>
-              <option value="Delivered">Delivered</option>
-            </select>
+            <p>&#8377;{order.totalAmount}</p>
+            <p>
+              Payment:{" "}
+              {order.payment?.status
+                ? `Paid (${order.payment.method})`
+                : "Failed"}
+            </p>
+            <p>Order Date: {new Date(order.orderDate).toLocaleDateString()}</p>
+            {order.payment?.status && (
+              <>
+                {order.estimatedDate && (
+                  <p>
+                    Estimated Delivery:{" "}
+                    {new Date(order.estimatedDate).toLocaleDateString()}
+                  </p>
+                )}
+                {order.shippedDate && (
+                  <p>Shipped Date: {new Date(order.shippedDate).toLocaleDateString()}</p>
+                )}
+                {order.deliveredDate && (
+                  <p>
+                    Delivered Date: {new Date(order.deliveredDate).toLocaleDateString()}
+                  </p>
+                )}
+                {getStatusOptions(order)}
+              </>
+            )}
+            {!order.payment?.status && <p>Order Failed</p>}
           </div>
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-
-export default Orders
+export default Orders;

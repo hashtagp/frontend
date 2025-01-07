@@ -8,6 +8,7 @@
 
 .admin-navbar .admin-logo{
     width: max(10%,80px);
+    cursor: pointer;
 }
 
 .admin-navbar .admin-profile{

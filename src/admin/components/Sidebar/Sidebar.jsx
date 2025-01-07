@@ -12,9 +12,9 @@ const Sidebar = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    navigate('/admin/add')
-  }, [navigate])
+  // useEffect(() => {
+  //   navigate('/admin/add')
+  // }, [navigate])
 
   return (
     <div className='sidebar'>

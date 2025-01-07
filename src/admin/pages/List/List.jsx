@@ -33,8 +33,10 @@ const List = () => {
   }
 
   useEffect(()=>{
+    if(token){
     fetchlist();
-  },[])
+    }
+  },[token])
 
   return (
     <div>
