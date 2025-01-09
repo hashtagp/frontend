@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { StoreContext } from "./context/StoreContext";
 import './App.css';
 import Navbar from './components/Navbar.jsx';
@@ -39,12 +39,22 @@ function App() {
 
   const isAdminRoute = location.pathname.startsWith("/admin");
 
+  useEffect(() => {
+    if (location.pathname === "/admin" && token) {
+      const tokenDeleted = localStorage.getItem("tokenDeleted");
+      if (!tokenDeleted) {
+        localStorage.removeItem("token");
+        localStorage.setItem("tokenDeleted", "true");
+      }
+    }
+  }, [location.pathname, token]);
+
   if (isAdminRoute) {
     return (
       <div className="app-admin">
         <AdminNavbar />
         <div className="admin-content">
-        <Sidebar />
+          <Sidebar />
           <Routes>
             <Route path="/admin/add" element={<Add />} />
             <Route path="/admin/list" element={<List />} />
@@ -55,37 +65,36 @@ function App() {
         {token ? null : <AdminLoginSignup />}
       </div>
     );
-  }
-else{
-  return (
-    <div className="app">
-      <Navbar />
-      <ToastContainer />
-      <div className="main-content">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/payment" element={<Payment />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/product/:productId" element={<Product />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/faq" element={<FAQ />} />
-          <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
-          <Route path="/package/:orderId" element={<Package />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/cart" element={<CartPage />} />
-          <Route path="/verify" element={<Verify />} />
-          <Route path="/myOrders" element={<MyOrders />} />
-          <Route path="/placeOrder" element={<PlaceOrder />} />
-          <Route path="/return-policy" element={<ReturnPolicy />} />
-          <Route path="*" element={<Home />} />
-        </Routes>
+  } else {
+    return (
+      <div className="app">
+        <Navbar />
+        <ToastContainer />
+        <div className="main-content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/payment" element={<Payment />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/product/:productId" element={<Product />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+            <Route path="/package/:orderId" element={<Package />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/verify" element={<Verify />} />
+            <Route path="/myOrders" element={<MyOrders />} />
+            <Route path="/placeOrder" element={<PlaceOrder />} />
+            <Route path="/return-policy" element={<ReturnPolicy />} />
+            <Route path="*" element={<Home />} />
+          </Routes>
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
-  );
-}
+    );
+  }
 }
 
 export default App;

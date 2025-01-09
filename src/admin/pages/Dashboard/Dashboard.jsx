@@ -38,6 +38,7 @@ const Dashboard = () => {
   const { url, token } = useContext(StoreContext);
 
   const fetchData = async () => {
+    console.log("fetchData called");
     try {
       const formattedDate = dayjs(selectedDate).format(
         filter === "yearly" ? "YYYY" : filter === "monthly" ? "YYYY-MM" : "YYYY-MM-DD"
@@ -47,40 +48,64 @@ const Dashboard = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      console.log("Fetched data:", response.data);
-      processChartData(response.data);
+      console.log("Fetched data:", response.data.orders);
+      processChartData(response.data.orders);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
-  const processChartData = (data) => {
+  const processChartData = (orders) => {
+    console.log("processChartData called");
     const groupedData = {};
 
-    data.forEach((order) => {
-      const orderDate = dayjs(order.date); // Assuming `order.date` is valid
+    // Initialize groupedData with all possible keys
+    if (filter === "yearly") {
+      for (let i = 0; i < 12; i++) {
+        const month = dayjs().month(i).format("YYYY-MM");
+        groupedData[month] = 0;
+      }
+    } else if (filter === "monthly") {
+      const daysInMonth = dayjs(selectedDate).daysInMonth();
+      for (let i = 1; i <= daysInMonth; i++) {
+        const day = dayjs(selectedDate).date(i).format("DD");
+        groupedData[day] = 0;
+      }
+    } else if (filter === "weekly") {
+      const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      daysOfWeek.forEach(day => {
+        groupedData[day] = 0;
+      });
+    } else if (filter === "daily") {
+      for (let i = 0; i < 24; i++) {
+        const hour = dayjs().hour(i).format("HH");
+        groupedData[hour] = 0;
+      }
+    }
+
+    orders.forEach((order) => {
+      const orderDate = dayjs(order.orderDate); // Use `orderDate` field from the order object
       let key;
 
       switch (filter) {
         case "yearly":
-          key = orderDate.format("YYYY");
-          break;
-        case "monthly":
           key = orderDate.format("YYYY-MM");
           break;
+        case "monthly":
+          key = orderDate.format("DD");
+          break;
         case "weekly":
-          key = `Week ${orderDate.week()} of ${orderDate.format("YYYY")}`;
+          key = orderDate.format("dddd");
           break;
         case "daily":
         default:
-          key = orderDate.format("YYYY-MM-DD");
+          key = orderDate.format("HH");
           break;
       }
 
-      if (!groupedData[key]) {
-        groupedData[key] = 0;
+      if (groupedData[key] !== undefined) {
+        groupedData[key]++;
       }
-      groupedData[key]++;
     });
 
     const labels = Object.keys(groupedData);
@@ -116,6 +141,24 @@ const Dashboard = () => {
     }
   }, [token, filter, selectedDate]);
 
+  useEffect(() => {
+    console.log("chartData state updated:", chartData);
+  }, [chartData]);
+
+  const getXAxisLabel = () => {
+    switch (filter) {
+      case "yearly":
+        return "Month";
+      case "monthly":
+        return "Day";
+      case "weekly":
+        return "Day of the Week";
+      case "daily":
+      default:
+        return "Hour";
+    }
+  };
+
   const chartOptions = {
     responsive: true,
     plugins: {
@@ -134,7 +177,7 @@ const Dashboard = () => {
       x: {
         title: {
           display: true,
-          text: "Date",
+          text: getXAxisLabel(),
         },
       },
       y: {
@@ -151,16 +194,9 @@ const Dashboard = () => {
     <div className="dashboard">
       <h2>Order Dashboard</h2>
 
-      <div>
-        <button onClick={() => handleFilterChange("yearly")}>Yearly</button>
-        <button onClick={() => handleFilterChange("monthly")}>Monthly</button>
-        <button onClick={() => handleFilterChange("weekly")}>Weekly</button>
-        <button onClick={() => handleFilterChange("daily")}>Daily</button>
-      </div>
-
-      <div style={{ margin: "20px 0" }}>
-        <label className="Choice">Select Date: </label>
-        <DatePicker
+      <div className="button-container">
+      <label className="Choice">Select Date: </label>
+      <DatePicker
           selected={selectedDate}
           onChange={(date) => setSelectedDate(date)}
           dateFormat={
@@ -173,6 +209,10 @@ const Dashboard = () => {
           showYearPicker={filter === "yearly"}
           showMonthYearPicker={filter === "monthly"}
         />
+        <button onClick={() => handleFilterChange("yearly")}>Yearly</button>
+        <button onClick={() => handleFilterChange("monthly")}>Monthly</button>
+        <button onClick={() => handleFilterChange("weekly")}>Weekly</button>
+        <button onClick={() => handleFilterChange("daily")}>Daily</button>
       </div>
 
       {chartData ? (

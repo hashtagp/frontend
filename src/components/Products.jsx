@@ -15,7 +15,8 @@ const Products = () => {
   useEffect(() => {
     axios.get(`${url}/api/products/allProducts`)
       .then(response => {
-        setProducts(response.data);
+        setProducts(response.data.products);
+        console.log("Products fetched successfully:", response.data);
       })
       .catch(error => {
         console.error('There was an error fetching the products!', error);
