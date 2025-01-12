@@ -164,7 +164,16 @@ const Orders = () => {
                 {getStatusOptions(order)}
               </>
             )}
-            {!order.payment?.status && <p>Order Failed</p>}
+            {!order.payment?.status && <p style={{
+            backgroundColor: "red",
+            color: "white",
+            padding: "5px 5px",
+            borderRadius: "5px",
+            fontWeight: "bold",
+            textAlign: "center",
+            margin: "10px auto",
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+          }}>Order Failed</p>}
           </div>
         ))}
       </div>

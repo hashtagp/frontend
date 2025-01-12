@@ -32,32 +32,39 @@ dayjs.extend(weekOfYear);
 
 const Dashboard = () => {
   const [filter, setFilter] = useState("daily");
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(dayjs().toDate());
   const [chartData, setChartData] = useState(null);
 
   const { url, token } = useContext(StoreContext);
 
   const fetchData = async () => {
-    console.log("fetchData called");
     try {
       const formattedDate = dayjs(selectedDate).format(
         filter === "yearly" ? "YYYY" : filter === "monthly" ? "YYYY-MM" : "YYYY-MM-DD"
       );
-
-      const response = await axios.get(url + "/api/admin/orders/all", {
+  
+      const response = await axios.get(`${url}/api/admin/orders/all`, {
         headers: { Authorization: `Bearer ${token}` },
+        params: { date: formattedDate, filter },
       });
-
-      console.log("Fetched data:", response.data.orders);
+  
       processChartData(response.data.orders);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
+
   const processChartData = (orders) => {
+    console.log("selectedDate:", selectedDate); 
     console.log("processChartData called");
     const groupedData = {};
+
+    if (orders.length === 0) {
+      setChartData(null);
+      return;
+    }
+    
 
     // Initialize groupedData with all possible keys
     if (filter === "yearly") {
@@ -132,7 +139,7 @@ const Dashboard = () => {
 
   const handleFilterChange = (newFilter) => {
     setFilter(newFilter);
-    setSelectedDate(new Date());
+    setSelectedDate(dayjs().toDate());
   };
 
   useEffect(() => {
@@ -218,7 +225,7 @@ const Dashboard = () => {
       {chartData ? (
         <Line data={chartData} options={chartOptions} />
       ) : (
-        <p>Loading chart...</p>
+        <p>No Data available for the selected date</p>
       )}
     </div>
   );
