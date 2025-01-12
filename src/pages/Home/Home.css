@@ -3,7 +3,7 @@
 }
 
 marquee {
-  background-color: #fff;
+  background-color: #ff6c20;
   height: 50px;
   display: inline-flex;
   align-items: center;
@@ -20,121 +20,87 @@ marquee {
   margin: 0 10rem;
   color: #251B1B;
   align-items: last baseline;
-  background-color: #fff;
+  background-color: inherit;
 }
 
 .home-container {
-  background-color: #fff;
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  grid-gap: 10px;
-  margin: 20px 0;
-  width: 100%;
-}
-
-.wardrobe {
-  background: linear-gradient(to bottom, #C36C77 50%, #C36C77 50%, #5D3439 100%);
-  border-radius: 15px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  max-height: fit-content;
-  padding: 10px 10px;
-  min-height: 320px;
-}
-
-.wardrobe-img {
-  background-color: inherit;
   display: flex;
-  justify-content: start;
-  align-items: last baseline;
-  width: 140%;
-  margin-bottom: -20px;
-}
-
-.wardrobe-img img {
-  width: 600px;
-  height: auto;
-  background-color: transparent;
-  align-items: last baseline;
-  margin-left: -50px;
-}
-
-.wardrobe-text {
-  background-color: inherit;
-  max-width: 420px;
-}
-
-.wardrobe-text h1 {
-  color: white;
-  font-size: 1.5rem;
-  background-color: inherit;
-  font-family: 'poppins', sans-serif;
-  font-weight: 700;
-  font-size: 42px;
-}
-
-.wardrobe-text p {
-  color: white;
-  font-size: 1rem;
-  background-color: inherit;
-  opacity: 0.8;
-}
-
-.wardrobe-text button {
-  background-color: #fff;
-  color: #C36C77;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  font-family: 'poppins', sans-serif;
-  font-weight: 700;
-  margin: 20px 0px;
+  flex-direction: column;
+  max-height: fit-content;
+  margin: 20px 0;
+  padding: 20px;
   border-radius: 15px;
+  text-align: center;
 }
 
-.badge {
-  background-color: #7FBFE1;
-  border-radius: 15px;
-  padding: 10px;
-  min-height: 320px;
-}
-
-.badge img {
-  background-color: transparent;
-  height: 200px;
-  margin-left: 35%;
-  margin-top: -25%;
-}
-
-.badge h1 {
-  color: white;
-  font-size: 42px;
-  background-color: inherit;
-  font-family: 'poppins', sans-serif;
+.home-container h1 {
+  font-size: 2rem;
+  font-family: 'Roboto', sans-serif;
   font-weight: 700;
-  background-color: inherit;
   color: #251B1B;
 }
 
-.badge p {
-  color: white;
+.home-container p{
+  color: #251B1B;
   font-size: 1rem;
-  background-color: inherit;
+  font-family: 'Roboto', sans-serif;
 }
 
-.badge button {
-  background-color: #fff;
-  color: #7FBFE1;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  font-family: 'poppins', sans-serif;
-  font-weight: 700;
-  margin: 20px 0px;
+.hampers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: center;
+  flex: 1;
+}
+
+.hampers-left, .hampers-right {
+  border-radius: 15px;
+  max-height: inherit;
+}
+
+.hampers-left img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 15px;
+  max-height: inherit;
+}
+
+.hampers-right {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.hampers-right div {
+  border-radius: 15px;
+  flex: 1;
+}
+
+.hampers-right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 15px;
 }
+.caption {
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  margin-top: 10px;
+}
+
+.caption h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #251B1B;
+}
+
+.caption p {
+  font-size: 0.9rem;
+  color: #888;
+}
+
 
 .banner {
   max-height: 320px;
@@ -149,7 +115,7 @@ marquee {
   background-color: inherit;
 }
 
-.banner span h1 {
+/* .banner span h1 {
   color: white;
   font-size: 4rem;
   font-family: 'montserrat', sans-serif;
@@ -184,14 +150,13 @@ marquee {
   align-items: center;
   margin: auto;
   padding: 10px;
-}
+} */
 
 .banner img {
-  width: auto;
+  width: 100%;
   height: 320px;
   object-fit: cover;
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
+  border-radius: 15px;
 }
 
 .explore {
@@ -207,22 +172,14 @@ marquee {
 
 .explore h1 {
   color: #251B1B;
-  font-size: 3rem;
-  font-family: 'montserrat', sans-serif;
-  font-weight: bolder;
-}
-
-.explore hr {
-  background-color: #251B1B;
-  width: 35%;
-  height: 5px;
-  margin: auto;
+  font-size: 2rem;
+  font-family: 'Roboto', sans-serif;
 }
 
 .explore h4 {
   color: #251B1B;
-  font-size: 2rem;
-  font-family: 'poppins', sans-serif;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
 }
 
 .explore button {
@@ -239,24 +196,23 @@ marquee {
 
 .explore-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   justify-content: space-between;
   gap: 20px;
   margin-top: 20px;
 }
 
 .explore-card {
-  text-align: start;
+  text-align: center;
   padding: 0px 20px;
   padding-top: 20px;
   border-radius: 15px;
-  margin-bottom: 0px; 
-  background: linear-gradient(to bottom, #636466 0%, #C6C8CC 100%);
+  margin-bottom: 0px;
 }
 
 .explore-card h3 {
   color: #251B1B;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-family: 'poppins', sans-serif;
   font-weight: 700;
   background-color: inherit;
@@ -266,7 +222,9 @@ marquee {
   margin: 0px auto;
   position: relative;
   object-fit: cover;
-  border-radius: 15px;   
+  border-radius: 15px;
+  border-radius: 100%;  
+  height: 150px; 
 }
 
 .promo {
@@ -384,11 +342,11 @@ marquee {
   }
 
   .explore-card h3 {
-    font-size: 2rem;
+    font-size: 1rem;
   }
 
   .explore-card img {
-    height: 200px;
+    height: 100px;
   }
 }
 
@@ -396,9 +354,7 @@ marquee {
   .carousel-slide {
     height: 300px; /* Adjust height for smaller screens */
   }
-  .home-container {
-    flex-direction: column;
-  }
+
 }
 
 @media screen and (max-width: 630px) {
@@ -415,32 +371,11 @@ marquee {
   }
 
   .banner img {
-    height: 250px;
+    height: 200px;
   }
 
-  .wardrobe-text h1 {
-    font-size: 30px;
-  }
-  
-  .wardrobe-text p {
-    font-size: 20px;
-  }
 }
 
-@media screen and (max-width: 400px) {
-  .badge h1 {
-    font-size: 25px;
-  }
-  .badge img {
-    margin-left: 10%;
-    margin-top: -30px;
-    height: 150px;
-  }
-
-  .wardrobe-img img {
-    margin-left: -30px;
-  }
-}
 
 @media screen and (max-width: 485px) {
   .carousel-container {
@@ -450,8 +385,13 @@ marquee {
     height: 200px; /* Adjust height for mobile view */
   }
 
-  .banner {
-    padding: 10px;
+
+  .home-container h1 {
+    font-size: 1.5rem;
+  }
+
+  .home-container p {
+    font-size: 0.75rem;
   }
 
   .banner span h1 {
@@ -467,29 +407,17 @@ marquee {
   }
 
   .banner img {
-    display: none;
+    height: 150px;
   }
 
-  .explore-container {
-    grid-template-columns: 1fr;
+  .explore h1 {
+    font-size: 1.5rem;
   }
 
-  .wardrobe-text h1 {
-    font-size: 20px;
-  }
-   
-  .wardrobe-text p {
-    font-size: 10px;
+
+  .explore h4 {
+    font-size: 0.75rem;
   }
 
-  .wardrobe {
-    min-height: fit-content;
-  }
-}
 
-@media screen and (max-width: 1270px) {
-  .home-container {
-    display: flex;
-    flex-direction: column;
-  }
 }

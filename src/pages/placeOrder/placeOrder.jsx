@@ -42,7 +42,7 @@ const PlaceOrder = () => {
         key: key,
         amount: amount * 100,
         currency: "INR",
-        name: "Dev Creations",
+        name: "Dev Creations & Solutions",
         description: "Order Payment",
         order_id: orderId,
         handler: function (response) {

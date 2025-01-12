@@ -129,7 +129,7 @@ const StoreContextProvider = (props) => {
     async function fetchItemList() {
       try {
         const response = await axios.get(url + "/api/products/allProducts");
-        setItemList(response.data);
+        setItemList(response.data.products);
       } catch (error) {
         console.error("Error fetching item list:", error);
       }

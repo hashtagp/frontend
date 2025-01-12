@@ -30,15 +30,18 @@ const Orders = () => {
   };
 
   const statusHandler = async (event, orderId) => {
+    console.log(event.target.value)
     try {
       const response = await axios.put(
         `${url}/api/admin/orders/update`,
         {
           orderId,
           status: event.target.value,
+          date: Date.now()
         },
         { headers: { Authorization: `Bearer ${token}` } }
       );
+      console.log("Update request sent");
       if (response.data.success) {
         await fetchAllOrders();
         toast.success("Order status updated");
@@ -60,15 +63,31 @@ const Orders = () => {
   // Function to determine the available options for status based on dates
   const getStatusOptions = (order) => {
     if (order.deliveredDate) {
-      return <p>Order Delivered</p>; // If delivered, show "Order Delivered"
+      return (
+        <p
+          style={{
+            backgroundColor: "green",
+            color: "white",
+            padding: "5px 5px",
+            borderRadius: "5px",
+            fontWeight: "bold",
+            textAlign: "center",
+            margin: "10px auto",
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+          }}
+        >
+          Order Delivered
+        </p>
+      );      
     }
     if (order.shippedDate) {
       return (
         <select
           onChange={(event) => statusHandler(event, order._id)}
-          value={order.status || "Shipped"}
+          value={order.status}
         >
-          <option value="Delivered">Delivered</option>
+          <option value="status">status</option>
+          <option value="delivered">Delivered</option>
         </select>
       ); // If shipped, show only "Delivered"
     }
@@ -76,10 +95,11 @@ const Orders = () => {
       return (
         <select
           onChange={(event) => statusHandler(event, order._id)}
-          value={order.status || "Ordered"}
+          value={order.status}
         >
-          <option value="Shipped">Shipped</option>
-          <option value="Delivered">Delivered</option>
+          <option value="status">status</option>
+          <option value="shipped">Shipped</option>
+          <option value="delivered">Delivered</option>
         </select>
       ); // If ordered, show "Shipped" and "Delivered"
     }
