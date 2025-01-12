@@ -4,22 +4,28 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { assets } from "../../assets/admin_assets/assets";
 import { StoreContext } from "../../../context/StoreContext";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const { url, token } = useContext(StoreContext);
 
-  const fetchAllOrders = async () => {
+  const fetchAllOrders = async (date) => {
     if (!token) {
       toast.error("Authorization token is missing");
       return;
     }
     try {
+      const formattedDate = date ? date.toISOString().split('T')[0] : null;
       const response = await axios.get(`${url}/api/admin/orders/all`, {
         headers: { Authorization: `Bearer ${token}` },
+        params: { date: formattedDate, filter: "daily" },
       });
       if (response.data.success && Array.isArray(response.data.orders)) {
         setOrders(response.data.orders);
+        console.log("Orders fetched:", response.data.orders);
       } else {
         toast.error("Failed to fetch orders");
       }
@@ -43,7 +49,7 @@ const Orders = () => {
       );
       console.log("Update request sent");
       if (response.data.success) {
-        await fetchAllOrders();
+        await fetchAllOrders(selectedDate);
         toast.success("Order status updated");
       } else {
         toast.error("Failed to update status");
@@ -56,9 +62,9 @@ const Orders = () => {
 
   useEffect(() => {
     if (token && url) {
-      fetchAllOrders();
+      fetchAllOrders(selectedDate);
     }
-  }, [token, url]);
+  }, [token, url, selectedDate]);
 
   // Function to determine the available options for status based on dates
   const getStatusOptions = (order) => {
@@ -109,6 +115,15 @@ const Orders = () => {
   return (
     <div className="order add">
       <h3>Order Page</h3>
+      <div className="date-picker-container">
+        <label className="Choice">Select Date: </label>
+        <DatePicker
+          selected={selectedDate}
+          onChange={(date) => setSelectedDate(date)}
+          dateFormat="yyyy-MM-dd"
+        />
+      </div>
+    {orders.length > 0 ? (
       <div className="order-list">
         {orders.slice().reverse().map((order, index) => (
           <div key={order._id || index} className="order-item">
@@ -177,6 +192,9 @@ const Orders = () => {
           </div>
         ))}
       </div>
+    ) : (
+      <p>No orders found</p>
+    )}  
     </div>
   );
 };
