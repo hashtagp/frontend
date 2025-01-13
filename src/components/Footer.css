@@ -276,6 +276,9 @@
   }
   
   @media screen and (max-width: 480px) {
+    .footer-logo{
+      width: fit-content;
+    }
     .footer-logo img {
       width: 300px;
     }
@@ -291,11 +294,8 @@
     .footer-bottom p {
       font-size: 12px;
     }
-  }
 
-
-  @media screen and (max-width: 420px) {
-    .footer-search-bar input[type="email"] {
+    .query .footer-query input[type="email"] {
       padding: 10px;
       padding-left: 20px;
       font-size: 22px;
@@ -305,7 +305,7 @@
       border-radius: 25px;
       outline: none;
       background-color: #636466;
-      width: 250px;
+      width: 300px;
   }
   }
   

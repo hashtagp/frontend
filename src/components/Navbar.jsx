@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { StoreContext } from '../context/StoreContext';
 import axios from "axios";
 import { debounce, set } from 'lodash';
+import nav_mobile_logo from "../assets/nav_mobile_logo.svg";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -65,15 +66,22 @@ const Navbar = () => {
         <div className="navbar-container">
 
           {/* Logo */}
-          <div className="logo">
+          <div className="logo nav-desktop-logo">
             <a href="/" onClick={() => setSearchResults([])}>
               <img src={devLogo2} alt="Dev Creations Logo" />
             </a>
           </div>
 
+          {/* Mobile Logo */}
+          <div className="logo nav-mobile-logo">
+            <a href="/" onClick={() => setSearchResults([])}>
+              <img src={nav_mobile_logo} alt="Dev Creations Logo" />
+            </a>
+          </div>
+
           <div className="nav-options">
           {/* Search Bar */}
-          <div className="search-bar w-[15rem] hidden sm:block">
+          <div className="search-bar w-[20rem] hidden sm:block">
             <input
               type="text"
               placeholder="Search products..."
@@ -125,6 +133,25 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
+      <div className="search-mobile w-[20rem] hidden sm:block">
+            <input
+              type="text"
+              placeholder="Search products..."
+              value={searchQuery}
+              onChange={handleSearchInputChange}
+            />
+            {searchQuery && searchResults.length > 0 && (
+              <div className="search-results">
+                <ul>
+                  {searchResults.map((result) => (
+                    <li key={result._id} onClick={() => handleProductClick(result._id)}>
+                      {result.name}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
     </div>
   );
 };

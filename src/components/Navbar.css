@@ -31,12 +31,18 @@
   background-color: transparent;
 }
 
+.nav-mobile-logo{
+  display: none;
+  width: 50px;
+}
+
 .nav-links {
   cursor: pointer;
   display: flex;
-  gap: 20px;
+  gap: 50px;
   font-weight: bold;
   background-color: white;
+  margin: 0 20px;
 }
 
 .nav-links li {
@@ -69,6 +75,26 @@
 }
 
 .search-bar input[type="text"] {
+  padding: 8px 15px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 50px;
+  width: 100%;
+  outline: none;
+  background-color: white;
+}
+
+.search-mobile {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background-color: white;
+  position: relative; /* Add relative positioning */
+  margin: 0 auto;
+  display: none;
+}
+
+.search-mobile input[type="text"] {
   padding: 8px 15px;
   font-size: 14px;
   border: 1px solid #ccc;
@@ -212,9 +238,21 @@
   }
 }
 
-@media screen and (max-width: 640px) {
-  
+@media screen and (max-width: 690px) {
+  .nav-desktop-logo{
+    display: none;
+  }
+
+  .nav-mobile-logo {
+    display: block;
+    /* Add any additional styles for the mobile logo */
+  }
+
   .search-bar {
     display: none;
+  }
+
+  .search-mobile{
+    display: block;
   }
 }
