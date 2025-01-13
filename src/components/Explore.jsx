@@ -17,6 +17,7 @@ const Explore = () => {
     const container = document.getElementById('imageContainer');
     const image1 = document.getElementById('image1');
     const image2 = document.getElementById('image2');
+    const divider = document.getElementById('divider');
 
     const handleMouseMove = (e) => {
       const rect = container.getBoundingClientRect();
@@ -25,6 +26,7 @@ const Explore = () => {
 
       image1.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
       image2.style.clipPath = `inset(0 0 0 ${percentage}%)`;
+      divider.style.left = `${cursorX}px`;
     };
 
     container.addEventListener('mousemove', handleMouseMove);
@@ -37,11 +39,9 @@ const Explore = () => {
   return (
     <div className='products'>
       <div className="main" onMouseEnter={handleHover}>
-        <div className={`hover-message ${hovered ? "hidden" : ""}`} onMouseEnter={handleHover}>
-          <h1 className={`${hovered ? "hidden" : ""}`} onMouseEnter={handleHover}>Hover me!!</h1>
-        </div>
         <div className="image-container" id="imageContainer">
           <div className="image" id="image1"></div>
+          <div className="divider" id="divider"></div>
           <div className="image" id="image2"></div>
         </div>
       </div>

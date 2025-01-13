@@ -69,6 +69,7 @@
     padding: 20px;
     background-color: var(--background-color);
     border-radius: 15px;
+    position: relative;
 }
 
 .hover-message {
@@ -122,6 +123,15 @@
 .image:last-child {
     background-image: url('../assets/home-banner-without-logo.jpg');
     clip-path: inset(0 0 0 100%);
+}
+
+.divider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: #ccc;
+    z-index: 500;
 }
 
 /* Responsive Design */
