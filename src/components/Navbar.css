@@ -208,6 +208,10 @@
   border-bottom: none;
 }
 
+.sm\:hidden {
+  display: none;
+}
+
 /* Ensure Nav Items are hidden when on mobile */
 @media screen and (max-width: 1110px) {
   .nav-links {
