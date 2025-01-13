@@ -118,7 +118,7 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Nav Links (Hamburger Menu) */}
-          <div className="sm:hidden">
+          <div className="menu-icon">
             <button onClick={toggleMenu} className="hamburger-menu">
               {isMobileMenuOpen ? "X" : "☰"} {/* Toggle between Hamburger and Close */}
             </button>

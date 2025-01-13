@@ -208,7 +208,7 @@
   border-bottom: none;
 }
 
-.sm\:hidden {
+.menu-icon {
   display: none;
 }
 
@@ -237,7 +237,7 @@
     display: block;
   }
 
-  .sm\:hidden{
+  .menu-icon{
     display: block;
   }
 }
