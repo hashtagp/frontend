@@ -133,7 +133,7 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      <div className="search-mobile w-[20rem] hidden sm:block">
+      <div className="search-mobile w-[20rem]">
             <input
               type="text"
               placeholder="Search products..."
