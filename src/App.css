@@ -19,12 +19,14 @@
     margin-top: 20px;
 }
 
-.main-content{
-    max-width: 1300px;
-    margin: 0 auto;
-}
-
 .admin-content{
     display: flex;
     transition: 3ms smooth;
   }
+
+@media screen and (min-width: 1600px){
+   .main-content{
+    max-width: 1300px;
+    margin: 0 auto;
+   }
+}

@@ -36,7 +36,7 @@
   margin-bottom: 20px;
 }
 
-.dashboard .button-container > button {
+.dashboard .button-container .filter-buttons > button {
   margin: 5px;
   padding: 10px 20px;
   font-size: 14px;
@@ -48,11 +48,16 @@
   transition: background-color 0.3s;
 }
 
-.dashboard .button-container > button:hover {
+.filter-buttons{
+  text-align: center;
+  align-items: center;
+}
+
+.dashboard .button-container .filter-buttons > button:hover {
   background-color: #0056b3;
 }
 
-.dashboard .button-container > button:focus {
+.dashboard .button-container .filter-buttons > button:focus {
   outline: none;
   box-shadow: 0 0 4px #007bff;
 }
@@ -97,4 +102,15 @@
   text-align: center;
   color: #777;
   font-size: 16px;
+}
+
+@media screen and (max-width: 768px) {
+  .dashboard h2{
+    font-size: 24px;
+  }
+
+  .dashboard .button-container{
+    flex-direction: column;
+  }
+  
 }

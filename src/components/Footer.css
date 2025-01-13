@@ -14,7 +14,6 @@
     padding-top: 0px;
     background-color: #636466;
     gap: 30px;
-    max-width: 1300px;
     margin:0 auto;
   }
 
@@ -45,8 +44,8 @@
   
   .footer-logo img {
     width: 350px;
-    height: 150px;
-    margin-bottom: 20px;
+    height: 120px;
+    margin: 20px 0px;
   }
   
   .footer-links {
@@ -254,7 +253,10 @@
     }
 
     .info{
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      width: 100%;
     }
   }
 
@@ -307,3 +309,10 @@
   }
   }
   
+@media screen and (min-width: 1600px){
+    .footer-container{
+      max-width: 1300px;
+      margin: 0 auto;
+      justify-content: space-between;
+    } 
+}

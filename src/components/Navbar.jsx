@@ -64,29 +64,6 @@ const Navbar = () => {
       <nav className="navbar">
         <div className="navbar-container">
 
-          {/* Desktop Nav Links */}
-          <div className="one py-25 font-medium hidden sm:block">
-            <ul className="nav-links">
-              <li onClick={() => handleMenuClick("")} className={menu === "" ? "active" : null}>Home</li>
-              <li onClick={() => handleMenuClick("products")} className={menu === "products" ? "active" : null}>Shop</li>
-              <li onClick={() => handleMenuClick("contact")} className={menu === "contact" ? "active" : null}>Contact</li>
-            </ul>
-          </div>
-
-          {/* Mobile Nav Links (Hamburger Menu) */}
-          <div className="sm:hidden">
-            <button onClick={toggleMenu} className="hamburger-menu">
-              {isMobileMenuOpen ? "X" : "☰"} {/* Toggle between Hamburger and Close */}
-            </button>
-            <div className={`mobile-menu ${isMobileMenuOpen ? 'open' : ''}`}>
-              <ul>
-                <li><a href="#" onClick={() => { toggleMenu(); handleMenuClick("") }} className={menu === "" ? "active" : null}>Home</a></li>
-                <li><a href="#" onClick={() => { toggleMenu(); handleMenuClick("Products") }} className={menu === "Products" ? "active" : null}>Shop</a></li>
-                <li><a href="#" onClick={() => { toggleMenu(); handleMenuClick("Contact") }} className={menu === "Contact" ? "active" : null}>Contact</a></li>
-              </ul>
-            </div>
-          </div>
-
           {/* Logo */}
           <div className="logo">
             <a href="/" onClick={() => setSearchResults([])}>
@@ -94,6 +71,7 @@ const Navbar = () => {
             </a>
           </div>
 
+          <div className="nav-options">
           {/* Search Bar */}
           <div className="search-bar w-[15rem] hidden sm:block">
             <input
@@ -115,10 +93,35 @@ const Navbar = () => {
             )}
           </div>
 
+          {/* Desktop Nav Links */}
+          <div className="one py-25 font-medium hidden sm:block">
+            <ul className="nav-links">
+              <li onClick={() => handleMenuClick("")} className={menu === "" ? "active" : null}>Home</li>
+              <li onClick={() => handleMenuClick("products")} className={menu === "products" ? "active" : null}>Shop</li>
+              <li onClick={() => handleMenuClick("contact")} className={menu === "contact" ? "active" : null}>Contact</li>
+            </ul>
+          </div>
+
+
           {/* Nav Icons */}
           <div className="nav-icons">
             <a href="#" className="icon cart" onClick={() => navigate("/cart")}>🛒</a>
             <a href="#" onClick={handleProfileClick} className="icon profile">👤</a>
+          </div>
+
+          {/* Mobile Nav Links (Hamburger Menu) */}
+          <div className="sm:hidden">
+            <button onClick={toggleMenu} className="hamburger-menu">
+              {isMobileMenuOpen ? "X" : "☰"} {/* Toggle between Hamburger and Close */}
+            </button>
+            <div className={`mobile-menu ${isMobileMenuOpen ? 'open' : ''}`}>
+              <ul>
+                <li><a href="#" onClick={() => { toggleMenu(); handleMenuClick("") }} className={menu === "" ? "active" : null}>Home</a></li>
+                <li><a href="#" onClick={() => { toggleMenu(); handleMenuClick("Products") }} className={menu === "Products" ? "active" : null}>Shop</a></li>
+                <li><a href="#" onClick={() => { toggleMenu(); handleMenuClick("Contact") }} className={menu === "Contact" ? "active" : null}>Contact</a></li>
+              </ul>
+            </div>
+          </div>
           </div>
         </div>
       </nav>

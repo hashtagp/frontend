@@ -216,10 +216,12 @@ const Dashboard = () => {
           showYearPicker={filter === "yearly"}
           showMonthYearPicker={filter === "monthly"}
         />
+        <div className="filter-buttons">
         <button onClick={() => handleFilterChange("yearly")}>Yearly</button>
         <button onClick={() => handleFilterChange("monthly")}>Monthly</button>
         <button onClick={() => handleFilterChange("weekly")}>Weekly</button>
         <button onClick={() => handleFilterChange("daily")}>Daily</button>
+        </div>
       </div>
 
       {chartData ? (

@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
 import './Home.css';
+import axios from 'axios';
+import { StoreContext } from '../../context/StoreContext';
 import mug from "../../assets/mug-home.png";
 import pens from "../../assets/pens-home.png";
 import keychains from "../../assets/keychains-home.png";
@@ -28,6 +30,24 @@ import banner_homepage from "../../assets/banner-homepage.png";
 
 const Carousel = () => {
   const navigate = useNavigate();
+  const [banner, setBanner] = useState({});
+
+  const { url } = useContext(StoreContext);
+
+  const fetchBanner = async () => {
+    try {
+      const response = await axios.get(`${url}/api/users/get/banner`);
+      console.log(response.data.data);
+      setBanner(response.data.data);
+    } catch (error) {
+      console.error('Error fetching banner:', error);
+    }
+  };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    fetchBanner();
+  }, []);
 
   return (
     <>
@@ -76,11 +96,11 @@ const Carousel = () => {
             needed to make a lasting impression.
           </p>
         </span> */}
-        <img src={banner_homepage} alt="Sale Banner" />
+        <img src={banner.image} alt={banner.name} />
       </div>
 
       <div className="explore">
-        <h1>Explore Our Collection</h1>
+        <h1>Explore Our <span style={{ color: "#FF6600" }}>Range</span></h1>
         <h4>Browse through our products</h4>
         <div className="explore-container">
           <div className="explore-card">

@@ -32,6 +32,7 @@ import Orders from "../src/admin/pages/Orders/Orders.jsx";
 import Sidebar from "../src/admin/components/Sidebar/Sidebar.jsx";
 import AdminNavbar from "../src/admin/components/Navbar/AdminNavbar.jsx";
 import Dashboard from "../src/admin/pages/Dashboard/Dashboard.jsx";
+import Banner from "../src/admin/pages/Banner/Banner.jsx";
 
 function App() {
   const { token } = useContext(StoreContext); // Use the token from context
@@ -59,6 +60,7 @@ function App() {
             <Route path="/admin/add" element={<Add />} />
             <Route path="/admin/list" element={<List />} />
             <Route path="/admin/orders" element={<Orders />} />
+            <Route path="/admin/banner" element={<Banner />} />
             <Route path="/admin" element={<Dashboard />} />
           </Routes>
         </div>

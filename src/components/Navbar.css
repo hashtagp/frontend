@@ -14,6 +14,12 @@
   background-color: white;
 }
 
+.nav-options{
+  display: flex;
+  gap: 20px;
+  background-color: white;
+}
+
 .logo {
   background-color: transparent !important;
   border: none;
@@ -77,6 +83,7 @@
   display: flex;
   gap: 15px;
   background-color: white;
+  align-items: center;
 }
 
 .icon {

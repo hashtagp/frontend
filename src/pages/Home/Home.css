@@ -1,5 +1,5 @@
 .home-content {
-  padding: 0 20px;
+  padding: 0 0;
 }
 
 marquee {
@@ -27,7 +27,6 @@ marquee {
   display: flex;
   flex-direction: column;
   max-height: fit-content;
-  margin: 20px 0;
   padding: 20px;
   border-radius: 15px;
   text-align: center;
@@ -107,8 +106,7 @@ marquee {
   min-width: 100%;
   display: flex;
   border-radius: 15px;
-  background-color: #EE7846;
-  margin-bottom: 20px;
+  padding: 20px;
 }
 
 .banner * {
@@ -338,7 +336,7 @@ marquee {
   }
 
   .explore-container {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 
   .explore-card h3 {
@@ -372,6 +370,10 @@ marquee {
 
   .banner img {
     height: 200px;
+  }
+
+  .explore-container {
+    grid-template-columns: 1fr 1fr;
   }
 
 }
@@ -419,5 +421,8 @@ marquee {
     font-size: 0.75rem;
   }
 
-
+  marquee{
+    height: 40px !important;
+    font-size: 24px !important;
+  }
 }
