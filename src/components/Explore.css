@@ -117,32 +117,56 @@
 
 .image:first-child {
     background-image: url('../assets/home-banner-with-logo.jpg');
-    clip-path: inset(0 100% 0 0);
+    clip-path: inset(0 50% 0 0); /* Show the left half initially */
 }
 
 .image:last-child {
     background-image: url('../assets/home-banner-without-logo.jpg');
-    clip-path: inset(0 0 0 100%);
+    clip-path: inset(0 0 0 50%); /* Show the right half initially */
 }
 
+/* Make sure the floating message appears above the divider */
 .divider {
     position: absolute;
     top: 0;
     bottom: 0;
     width: 2px;
     background-color: #ccc;
-    z-index: 500;
+    z-index: 500; /* Divider's z-index */
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
-.divider img {
+.floating-message {
     position: absolute;
-    bottom: -10px; /* Adjust the bottom position to make it visible */
-    z-index: 1000;
-    width: 20px; /* Adjust the size as needed */
-    height: 20px; /* Adjust the size as needed */
-    transform: translateX(-50%); /* Center the image horizontally */
+    top: 50%; /* Center vertically */
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 15px 30px;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+    font-family: 'Arial', sans-serif;
+    z-index: 10;
+    transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+    opacity: 1;
+    pointer-events: none; /* Prevent interaction */
+  }
+  
+.floating-message h1 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.floating-message p {
+    font-size: 16px;
+    font-weight: normal;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 /* Responsive Design */
