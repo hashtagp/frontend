@@ -132,6 +132,17 @@
     width: 2px;
     background-color: #ccc;
     z-index: 500;
+    display: flex;
+    justify-content: center;
+}
+
+.divider img {
+    position: absolute;
+    bottom: -10px; /* Adjust the bottom position to make it visible */
+    z-index: 1000;
+    width: 20px; /* Adjust the size as needed */
+    height: 20px; /* Adjust the size as needed */
+    transform: translateX(-50%); /* Center the image horizontally */
 }
 
 /* Responsive Design */

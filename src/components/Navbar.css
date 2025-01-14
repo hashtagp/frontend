@@ -251,7 +251,9 @@
     display: block;
     /* Add any additional styles for the mobile logo */
   }
+}
 
+@media screen and (max-width: 580px){
   .search-bar {
     display: none;
   }
@@ -259,4 +261,5 @@
   .search-mobile{
     display: block;
   }
+  
 }

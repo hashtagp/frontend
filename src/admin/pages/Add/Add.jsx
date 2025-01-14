@@ -80,11 +80,14 @@ const Add = () => {
                 <option value="Mug">Mug</option>
                 <option value="Diary">Diary</option>
                 <option value="Bottle">Bottle</option>
-                <option value="3-D printing models">3-D printing models</option>
+                <option value="3-D">3-D printing models</option>
                 <option value="Keychains">Keychains</option>
-                <option value="Mobile stand">Mobile stand</option>
-                <option value="Pen stand">Pen stand</option>
-                <option value="Bonsai plant">Bonsai plant</option>
+                <option value="Mobile-stand">Mobile stand</option>
+                <option value="Pen-stand">Pen stand</option>
+                <option value="Bonsai-plant">Bonsai plant</option>
+                <option value="Monstera-plant">Monstera plant</option>
+                <option value="Bamboo-plant">Bamboo plant</option>
+                <option value="Jade-plant">Jade plant</option>
               </select>
             </div>
             <div className="add-price flex-col">

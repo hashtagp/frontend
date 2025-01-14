@@ -12,6 +12,9 @@ import mobile_stand from "../../assets/phone-stand-home.png";
 import pen_stand from "../../assets/pen-stand-home.png";
 import gift_plant from "../../assets/plants-home.png";
 import bottle_home from "../../assets/bottle-home.png";
+import bamboo_home from "../../assets/bamboo-home.png";
+import monstera_home from "../../assets/monstera-home.png";
+import jade_home from "../../assets/jade-home.png";
 import Explore from '../../components/Explore';
 import om from "../../assets/om.svg";
 import badge from "../../assets/badge.png";
@@ -31,8 +34,23 @@ import banner_homepage from "../../assets/banner-homepage.png";
 const Carousel = () => {
   const navigate = useNavigate();
   const [banner, setBanner] = useState({});
+  const [menu, setMenu] = useState("All");
 
   const { url } = useContext(StoreContext);
+
+  const range = [
+    {image: pens, name: "Pens", category: "Pens"},
+    {image: dairy, name: "Diary", category: "Diary"},
+    {image: pen_stand, name: "Pen stand", category: "Pen-stand"},
+    {image: bottle_home, name: "Bottle", category: "Bottle"},
+    {image: keychains, name: "Keychains", category: "Keychains"},
+    {image: mobile_stand, name: "Mobile stand", category: "Mobile-stand"},
+    {image: mug, name: "Gift mugs", category: "Mug"},
+    {image: gift_plant, name: "Gift plant", category: "Bonsai-plant"},
+    {image: bamboo_home, name: "Bamboo plant", category: "Bamboo-plant"},
+    {image: monstera_home, name: "Monstera plant", category: "Monstera-plant"},
+    {image: jade_home, name: "Jade plant", category: "Jade-plant"},
+  ]
 
   const fetchBanner = async () => {
     try {
@@ -45,7 +63,6 @@ const Carousel = () => {
   };
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     fetchBanner();
   }, []);
 
@@ -102,90 +119,57 @@ const Carousel = () => {
       <div className="explore">
         <h1>Explore Our <span style={{ color: "#FF6600" }}>Range</span></h1>
         <h4>Browse through our products</h4>
-        <div className="explore-container">
-          <div className="explore-card">
-            <img
-              onClick={() => navigate("/products?category=Mug")}
-              src={mug}
-              alt="Gift mugs"
-            />
-            <h3>Gift mugs</h3>
-          </div>
-          <div className="explore-card">
-            <img
-              onClick={() => navigate("/products?category=Pens")}
-              src={pens}
-              alt="Pens"
-            />
-            <h3>Pens</h3>
-          </div>
-          <div className="explore-card">
-            <img
-              onClick={() => navigate("/products?category=Keychains")}
-              src={keychains}
-              alt="Key chains"
-            />
-            <h3>Key chains</h3>
-          </div>
-          <div className="explore-card">
-            <img
-              onClick={() => navigate("/products?category=Diary")}
-              src={dairy}
-              alt="Personal dairy"
-            />
-            <h3>Personal dairy</h3>
-          </div>
-          <div className="explore-card">
-            <img
-              onClick={() => navigate("/products?category=Mobile-stand")}
-              src={mobile_stand}
-              alt="Mobile stand"
-            />
-            <h3>Mobile stand</h3>
-          </div>
-          <div className="explore-card">
-            <img
-              onClick={() => navigate("/products?category=Pen-stand")}
-              src={pen_stand}
-              alt="Pen stand"
-            />
-            <h3>Pen stand</h3>
-          </div>
-          <div className="explore-card">
-            <img
-              onClick={() => navigate("/products?category=Bonsai-plant")}
-              src={gift_plant}
-              alt="gift_plant"
-            />
-            <h3>Gift plant</h3>
-          </div>
-          <div className="explore-card">
-            <img
-              onClick={() => navigate("/products?category=Bottle")}
-              src={bottle_home}
-              alt="bottle_home"
-            />
-            <h3>Bottle</h3>
-          </div>
+        <div className="explore-product-categories">
+            <button className={`explore-category ${menu==="All"?"active":null}`} onClick={()=> setMenu("All")}>Best Sellers</button>
+            <button className={`explore-category ${menu==="Plant"?"active":null}`} onClick={()=> setMenu("Plant")}>Plants</button>
+            <button className={`explore-category ${menu==="Work Essentials"?"active":null}`} onClick={()=> setMenu("Work Essentials")}>Work Essentials</button>
         </div>
+        <div className="explore-container">
+          {range.map((item, index) => { 
+            if(menu === "All"){
+              if(index < 8){
+              return (
+                <div key={index} className="explore-card">
+                  <img
+                    onClick={() => navigate(`/products?category=${item.category}`)}
+                    src={item.image}
+                    alt={item.name}
+                  />
+                  <h3>{item.name}</h3>
+                </div>
+              )
+              }
+            } else if(menu === "Plant"){
+              if(index > 6){
+                return (
+                  <div key={index} className="explore-card">
+                    <img
+                      onClick={() => navigate(`/products?category=${item.category}`)}
+                      src={item.image}
+                      alt={item.name}
+                    />
+                    <h3>{item.name}</h3>
+                  </div>
+                )
+              }
+            } else if(menu === "Work Essentials"){
+              if(index < 4){
+                return (
+                  <div key={index} className="explore-card">
+                    <img
+                      onClick={() => navigate(`/products?category=${item.category}`)}
+                      src={item.image}
+                      alt={item.name}
+                    />
+                    <h3>{item.name}</h3>
+                  </div>
+                )
+              }
+            }
+          }
+          )}
+          </div>
         <button onClick={() => navigate("/products")}>EXPLORE MORE</button>
-      </div>
-
-      <div className="promo">
-        <span className="promo-text">
-          <h1>Unlock your creativity with our professional courses</h1>
-          <p>
-            Unlock your potential with expertly designed courses at Dev
-            Creations. Master Graphic Design, 3D Animation, or Audio-Video
-            Editing using industry-standard tools like Photoshop, Maya, and
-            Premiere Pro. Turn creativity into career-ready skills with guidance
-            from professionals!
-          </p>
-          <button>EXPLORE</button>
-        </span>
-        <span className="promo-img">
-          <img src={man_laptop} alt="" />
-        </span>
       </div>
     </div>
     </>

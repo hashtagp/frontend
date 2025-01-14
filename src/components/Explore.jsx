@@ -4,6 +4,7 @@ import combo from "../assets/combo.webp";
 import models from "../assets/3d models.jpg";
 import plant from "../assets/bonsai plants.jpg";
 import { useNavigate } from 'react-router-dom';
+import left_right_icon from "../assets/left_right_icon.png";
 
 const Explore = () => {
   const [hovered, setHovered] = useState(false);
@@ -41,7 +42,9 @@ const Explore = () => {
       <div className="main" onMouseEnter={handleHover}>
         <div className="image-container" id="imageContainer">
           <div className="image" id="image1"></div>
-          <div className="divider" id="divider"></div>
+          <div className="divider" id="divider">
+            <img src={left_right_icon} alt="" />
+          </div>
           <div className="image" id="image2"></div>
         </div>
       </div>

@@ -162,7 +162,7 @@ marquee {
   background-color: #fff;
   text-align: center;
   margin: auto;
-  margin-top: 40px;
+  margin-top: 10px;
 }
 
 .explore * {
@@ -201,6 +201,38 @@ marquee {
   margin-top: 20px;
 }
 
+.explore-product-categories {
+  margin: 0 auto;
+  margin-bottom: 2rem;
+}
+
+.explore-category {
+  background-color: #F68B20;
+  color: #fff;
+  border:  #F68B20;
+  border-radius: 5px;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 16px;
+  
+}
+
+.explore-product-categories button{
+  background-color: white; 
+  color: black; 
+  border: 2px solid  #F68B20;   
+  margin: 10px 10px;
+}
+
+.explore-product-categories .active{
+  background-color:  #F68B20;
+  color: white; 
+}
+
 .explore-card {
   text-align: center;
   padding: 0px 20px;
@@ -226,56 +258,11 @@ marquee {
   height: 150px; 
 }
 
-.promo {
-  background-color: #f1f0f0;
-  border-radius: 15px;
-  padding: 20px;
-  margin-bottom: 20px;
-  display: grid;
-  grid-template-columns: 1.5fr 0.5fr;
-}
 
-.promo * {
-  background-color: #fff;
-}
-
-.promo-text {
-  padding: 20px;
-}
-
-.promo-text h1 {
-  color: #000000;
-  font-weight: 900;
-  font-size: 35px;
-  font-family: 'montserrat', sans-serif;
-}
-
-.promo-text p {
-  color: #000000;
-  font-size: 26px;
-  font-family: 'montserrat', sans-serif;
-}
-
-.promo-text button {
-  color: #f4a261;
-  background-color: #f1f0f0;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1rem;
-  font-family: 'poppins', sans-serif;
-  font-weight: 700;
-  margin: 20px 0px;
-  border-radius: 15px;
-}
-
-.promo-img {
-  height: 100%;
-  width: auto;
-}
-
-.promo-img img {
-  height: 100%;
-  object-fit: cover;
+@media screen and (min-width: 810px) {
+  .explore{
+    margin-top: 40px;
+  }
 }
 
 @media screen and (max-width: 810px) {
@@ -293,31 +280,6 @@ marquee {
 
   .banner img {
     height: 250px;
-  }
-
-  .promo-text button {
-    font-size: 0.8rem;
-  }
-
-  .promo {
-    display: flex;
-    flex-direction: column-reverse;
-  }
-
-  .promo-text {
-    padding: 0px;
-  }
-
-  .promo-text h1 {
-    font-size: 30px;
-  }
-
-  .promo-text p {
-    font-size: 20px;
-  }
-
-  .promo-text button {
-    font-size: 0.8rem;
   }
 
   .explore h1 {
@@ -420,6 +382,11 @@ marquee {
 
   .explore h4 {
     font-size: 0.75rem;
+  }
+
+  .explore-product-categories .explore-category {
+    font-size: 0.75rem;
+    padding: 5px 10px;
   }
 
   marquee{
