@@ -72,7 +72,7 @@ function Signup() {
   };
 
   return (
-    <div className={`container ${isActive ? 'active' : ''}`} id="container">
+    <div className={`auth-container ${isActive ? 'active' : ''}`} id="container">
       <div className="form-container sign-up">
         <form onSubmit={handleSignup}>
           <h1>Create Account</h1>
