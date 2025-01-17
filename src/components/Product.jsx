@@ -11,6 +11,7 @@ const Product = () => {
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const { url, addToCart } = useContext(StoreContext);
   const [length, setLength] = useState(false);
+  const [disable,setDisable] = useState(false);
 
   const bangalorePincodes = [
     // Bangalore Urban
@@ -85,10 +86,12 @@ const Product = () => {
   };
 
   const handleAddToCart = () => {
+    setDisable(true);
     const productToAdd = { ...product, id: product._id };
     console.log('Adding to cart:', productToAdd);
     addToCart(productToAdd);
     setIsAddedToCart(true);
+    setDisable(false);
   };
 
   if (!product) {
@@ -129,11 +132,12 @@ const Product = () => {
             <button
               onClick={handleAddToCart}
               className="py-2 bg-white border border-black text-orange-500 hover:bg-gray-100 rounded-2xl w-full font-semibold"
+              disabled={disable}
             >
               {isAddedToCart ? 'Add More...' : 'Add to Cart'}
             </button>
             {/* Buy Now Button */}
-            <button className="py-2 bg-orange-400 hover:bg-orange-500 rounded-2xl w-full font-semibold text-white">
+            <button className="py-2 bg-orange-400 hover:bg-orange-500 rounded-2xl w-full font-semibold text-white" disabled={disable}>
               Buy Now
             </button>
           </div>

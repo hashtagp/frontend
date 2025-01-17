@@ -8,6 +8,7 @@ import { toast } from 'react-toastify'
 const Banner = () => {
 
     const [image,setImage]=useState(false);
+    const [disable,setdisable] = useState(false);
     const { url,token } = useContext(StoreContext);
     const [data,setData]=useState({
     name:"",
@@ -21,6 +22,7 @@ const Banner = () => {
 
   const onSubmitHandler=async(event)=>{
     event.preventDefault();
+    setdisable(true);
     const formData = new FormData();
     formData.append('image', image);
     formData.append('name', data.name);
@@ -30,9 +32,11 @@ const Banner = () => {
         name:"",
       })
       setImage(false)
+      setdisable(false)
       toast.success(response.data.message)
     }
     else{
+      setdisable(false)
       toast.error(response.data.message)
     }
     
@@ -52,7 +56,7 @@ const Banner = () => {
                 <p>Banner name</p>
                 <input onChange={onChangeHandler} value={data.name} type="text" name="name" placeholder='Type here' />
             </div>
-            <button type="submit" className='add-btn'>SAVE</button>
+            <button type="submit" className='add-btn' disabled={disable}>SAVE</button>
         </form>
     </div>            
   )

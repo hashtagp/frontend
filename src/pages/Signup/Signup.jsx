@@ -12,6 +12,7 @@ function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [disable,setDisable] = useState(false);
   const { url, setToken } = useContext(StoreContext);
   const navigate = useNavigate();
 
@@ -36,14 +37,17 @@ function Signup() {
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    setDisable(true);
     try {
       const response = await axios.post(`${url}/api/auth/register`, { username, email, password });
       setToken(response.data.accessToken);
       localStorage.setItem('token', response.data.accessToken);
       setError('');
+      setDisable(false);
       navigate('/');
     } catch (error) {
       setError(error.message);
+      setDisable(false);
       console.error('There was an error registering the user!', error);
       alert('Registration failed');
     }
@@ -51,14 +55,17 @@ function Signup() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setDisable(true);
     try {
       const response = await axios.post(`${url}/api/auth/login`, { username, password });
       setToken(response.data.accessToken);
       localStorage.setItem('token', response.data.accessToken);
       setError('');
+      setDisable(false);
       navigate('/');
     } catch (error) {
       setError(error.message);
+      setDisable(false);
       console.error('There was an error logging in the user!', error);
       alert('Login failed');
     }
@@ -84,7 +91,7 @@ function Signup() {
           <p>By signing in, you agree to our</p>
           <a className='tnc' onClick={() => navigate("/terms-and-conditions")}>*Terms and Conditions</a>
           <br />
-          <button type="submit">Sign Up</button>
+          <button type="submit" disabled={disable}>Sign Up</button>
           <br />
         </form>
       </div>
@@ -106,7 +113,7 @@ function Signup() {
           <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} required />
           <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
           <a href="#">Forget Your Password?</a>
-          <button type="submit">Sign In</button>
+          <button type="submit" disabled={disable}>Sign In</button>
         </form>
       </div>
       {!isMobile && (

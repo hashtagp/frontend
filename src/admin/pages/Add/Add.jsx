@@ -8,6 +8,7 @@ import { StoreContext } from '../../../context/StoreContext'
 const Add = () => {
 
   const [image,setImage]=useState(false);
+  const [disable,setdisable] = useState(false);
   const { url,token } = useContext(StoreContext);
     const [data,setData]=useState({
     name:"",
@@ -25,6 +26,7 @@ const Add = () => {
 
   const onSubmitHandler=async(event)=>{
     event.preventDefault();
+    setdisable(true);
     const formData = new FormData();
     formData.append('name', data.name);
     formData.append('description', data.description);
@@ -42,9 +44,11 @@ const Add = () => {
         discount:""
       })
       setImage(false)
+      setdisable(false);
       toast.success(response.data.message)
     }
     else{
+      setdisable(false);
       toast.error(response.data.message)
     }
     
@@ -99,7 +103,7 @@ const Add = () => {
             <p>Discount</p>
             <input onChange={onChangeHandler} value={data.discount} type="Number" name="discount" placeholder="Percentage"  />
           </div>
-          <button type="submit" className='add-btn'>ADD</button>
+          <button type="submit" className='add-btn' disabled={disable}>ADD</button>
         </form>
       </div>
     </div>

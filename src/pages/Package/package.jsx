@@ -54,7 +54,7 @@ const Package = () => {
       </div>
     );
   }
-<div className="error text-red-500 text-2xl font-bold">Failed to load order. Please try again.</div>
+
   if (!order) {
     return (
       <div className='loading'>
@@ -107,11 +107,11 @@ const Package = () => {
       </div>
 
       <div className="flex flex-col lg:flex-row gap-8">
-        <div className="w-full bg-orange-200 p-6 rounded-lg shadow-md">
+        <div className="w-full lg:w-2/3 bg-white-200 p-6 rounded-lg shadow-md border-t-4 border-gray-300">
           <h2 className="text-xl font-bold mb-4">Products</h2>
           <div id="cart-items" className="space-y-6">
             {order.items.map((item, index) => (
-              <div key={index} className="flex flex-wrap items-center justify-between border-b pb-4 bg-orange-200 rounded-lg p-4 sm:flex-row flex-col">
+              <div key={index} className="flex flex-wrap items-center justify-between border-b pb-4 bg-white-200 rounded-lg p-4 sm:flex-row flex-col">
                 <img src={item.image || "default-image-url"} alt={item.name || "Product Image"} className="w-48 h-48 rounded-lg object-cover" />
                 <div className="flex-1 ml-4">
                   <h2 className="text-lg font-semibold">{item.name}</h2>
@@ -123,7 +123,7 @@ const Package = () => {
                   <span className="font-medium">Rs {item.price}</span>
                   <div className="flex items-center border rounded">
                     {/* <button className="px-2 py-1 text-gray-600" onClick={() => updateQuantity(-1, item.price, index)}>-</button> */}
-                    <input id={`quantity-${index}`} type="text" value={item.quantity} className="w-8 text-center border-l border-r" readOnly />
+                    <input id={`quantity-${index}`} type="text" value={`x ${item.quantity}`} className="w-8 text-center border-l border-r" readOnly />
                     {/* <button className="px-2 py-1 text-gray-600" onClick={() => updateQuantity(1, item.price, index)}>+</button> */}
                   </div>
                   <span id={`total-${index}`} className="font-medium">Rs {item.price * item.quantity}</span>
@@ -132,12 +132,29 @@ const Package = () => {
             ))}
           </div>
         </div>
-      </div>
 
-      <div className="mt-8 bg-gray-100 p-6 rounded-lg shadow-md">
-        <h2 className="text-xl font-bold mb-4">Order Details</h2>
-        <div className="font-semibold text-lg mt-8">Total: Rs {order.totalAmount}</div> {/* Shipping + Sales Tax */}
-        <div className="font-semibold text-lg mt-8">Payment status: {order.payment.status?"Paid":"Failed"}</div> {/* Shipping + Sales Tax */}
+        <div className="w-full lg:w-1/3 bg-white-200 p-6 rounded-lg shadow-md border-t-4 border-gray-300">
+        <h2 className="text-xl font-bold mb-4">Order details</h2>
+              <hr className='h-4' />
+              <div className="flex justify-between py-2 font-bold">
+                <span>SUBTOTAL</span>
+                <span id="subtotal">Rs {order.totalAmount-400}</span>
+              </div>
+              <div className="flex justify-between py-2">
+                <span>Shipping</span>
+                <span>Rs {100}</span>
+              </div>
+              <div className="flex justify-between py-2">
+                <span>Sales Tax</span>
+                <span>Rs {300}</span>
+              </div>
+              <hr className="my-4" />
+              <div className="flex justify-between font-bold text-lg">
+                <span>TOTAL:</span>
+                <span id="estimated-total">Rs {order.totalAmount}</span>
+              </div>
+          <div className="font-semibold text-lg mt-8">Payment status: {order.payment.status ? "Paid" : "Failed"}</div> {/* Shipping + Sales Tax */}
+        </div>
       </div>
     </div>
   );

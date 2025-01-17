@@ -82,7 +82,6 @@ const StoreContextProvider = (props) => {
       const item = cartItems[itemId];
       totalValue += item.price * item.quantity;
     }
-    setValue(true);
     return totalValue;
   };
 
@@ -136,6 +135,13 @@ const StoreContextProvider = (props) => {
     }
     fetchItemList();
   }, []);
+
+  useEffect(() => {
+    const totalValue = getTotalCartValue();
+    if (totalValue > 0) {
+      setValue(true);
+    }
+  }, [cartItems]);
 
   const contextValue = {
     cartItems,
