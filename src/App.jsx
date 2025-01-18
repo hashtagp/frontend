@@ -48,6 +48,9 @@ function App() {
         localStorage.setItem("tokenDeleted", "true");
       }
     }
+    else{
+      localStorage.removeItem("tokenDeleted");
+    }
   }, [location.pathname, token]);
 
   if (isAdminRoute) {
