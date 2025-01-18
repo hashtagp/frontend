@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 import { useContext, useEffect } from "react";
 import { StoreContext } from "./context/StoreContext";
 import './App.css';
+import axios from 'axios';
 import Navbar from './components/Navbar.jsx';
 import Signup from './pages/Signup/Signup.jsx';
 import Payment from "./pages/Payment/Payment.jsx";
@@ -35,29 +36,28 @@ import Dashboard from "../src/admin/pages/Dashboard/Dashboard.jsx";
 import Banner from "../src/admin/pages/Banner/Banner.jsx";
 
 function App() {
-  const { token } = useContext(StoreContext); // Use the token from context
+  const { token,url } = useContext(StoreContext); // Use the token from context
   const location = useLocation(); // Get the current location
 
   const isAdminRoute = location.pathname.startsWith("/admin");
 
   useEffect(() => {
+    const verify = async () => {
     if (location.pathname === "/admin" && token) {
-      const tokenDeleted = localStorage.getItem("tokenDeleted");
-      if (!tokenDeleted) {
+      const response = await axios.get(`${url}/api/admin/verify`, {headers: {Authorization: `Bearer ${token}`}});
+      if (response.status === 401) {
         localStorage.removeItem("token");
-        localStorage.setItem("tokenDeleted", "true");
       }
     }
-    else{
-      localStorage.removeItem("tokenDeleted");
-    }
+  }
+    verify();
   }, [location.pathname, token]);
 
   if (isAdminRoute) {
     return (
       <div className="app-admin">
         <AdminNavbar />
-        <div className="admin-content">
+        <div className={`admin-content ${token ? "" : "blur"}`}>
           <Sidebar />
           <Routes>
             <Route path="/admin/add" element={<Add />} />
