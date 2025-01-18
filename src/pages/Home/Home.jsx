@@ -42,6 +42,12 @@ const Home = () => {
     { image: jade_home, name: "Jade plant", category: "Jade-plant" },
   ];
 
+  const reviews = [
+    { name: "Shivaji Shankar", review: "This pen has an elegant and timeless design, making it an excellent gift for professionals or students.The smooth writing experience adds to its charm, and the premium feel makes it a standout gift for special occasions like graduations",color: "F2B980", border: "F68B20" },
+    { name: "Rajkumar", review: "Stylish yet functional, this keychain is both a practical and thoughtful gift. The sturdy build ensures it lasts, while the sleek design adds a touch of elegance. Perfect for gifting as a small token of appreciation or for personalized touches with initials or engravings.", color: "C5F6FF", border: "629AA4" },
+    { name: "Sneha", review: "This pen stand is a great addition to any desk, adding a touch of sophistication and organization. The sleek design and sturdy build make it a perfect gift for professionals or students.", color: "F2CBE7", border: "C36C77" },
+  ];
+
   const fetchBanner = async () => {
     try {
       const response = await axios.get(`${url}/api/users/get/banner`);
@@ -156,6 +162,33 @@ const Home = () => {
             })}
           </div>
           <button onClick={() => navigate("/products")}>EXPLORE MORE</button>
+        </div>
+
+        <div className="customer-reviews">
+        <h1>
+            Customer <span style={{ color: "#FF6600" }}>Reviews</span>
+          </h1>
+          <h4>Hear what our customers have to say</h4>
+          <hr/>
+          <div className="reviews-list">
+            {reviews.map((item, index) => (
+              <div
+                key={index}
+                className="reviews-card"
+                style={{
+                  backgroundColor: `rgba(${parseInt(item.color.slice(0, 2), 16)}, ${parseInt(item.color.slice(2, 4), 16)}, ${parseInt(item.color.slice(4, 6), 16)}, 0.2)`, // Use RGBA with low alpha for transparency
+                  opacity: "1", // Ensure opacity of text and content remains 100% visible
+                  border : `2px solid #${item.border}`
+                }}
+              >
+                <h4>{item.name}</h4>
+                <p>{item.review}</p>
+                <div className="stars">
+                  &#11088;&#11088;&#11088;&#11088;&#11088;
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>

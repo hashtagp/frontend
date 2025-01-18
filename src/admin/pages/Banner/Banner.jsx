@@ -68,9 +68,13 @@ const Banner = () => {
   },[url,disable])
 
   return (
-    <div className="banner-container">
+    <div className="banner-details">
     <div className="add-banner">
         <form className='flex-col' onSubmit={onSubmitHandler}>
+            <div className="add-banner-product-name flex-col">
+                <p>Banner name</p>
+                <input onChange={onChangeHandler} value={data.name} type="text" name="name" placeholder='Type here' />
+            </div>
             <div className="add-banner-img-upload flex-col">
                 <p>Banner Image</p>
                 <label htmlFor="image">
@@ -78,32 +82,27 @@ const Banner = () => {
                 </label>
                 <input onChange={(e)=>setImage(e.target.files[0])} type="file" id="image" hidden required />
             </div>
-            <div className="add-banner-product-name flex-col">
-                <p>Banner name</p>
-                <input onChange={onChangeHandler} value={data.name} type="text" name="name" placeholder='Type here' />
-            </div>
-            <button type="submit" className='add-btn' disabled={disable}>SAVE</button>
+            <button type="submit" className='save-btn' disabled={disable}>SAVE</button>
         </form>
-    </div>  
-    <br/>
+    </div> 
     <div className="banner-list-table">
           <div className="list-table-format title">
-            <p>Image</p>
-            <p>Name</p>
-            <p>Action</p>
+            Banner Details:
           </div>
           {bannerList.map((banner, index) => {
               return (
                 <div key={index} className='list-table-format'>
                   <img src={banner.image} alt="" />
+                  <div>
                   <p>{banner.name}</p>
                   <p onClick={() => removeBanner(banner._id)} className='cursor' disabled={disable}>Delete</p>
+                  </div>
                 </div>
               )
             }
             )}
         </div>
-      </div>
+  </div>
   )
 }
 

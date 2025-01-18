@@ -199,7 +199,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      <h2>Order Dashboard</h2>
+      <h2>Order <span>Dashboard</span></h2>
 
       <div className="button-container">
       <label className="Choice">Select Date: </label>

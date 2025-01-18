@@ -1,32 +1,30 @@
-import React, { useContext, useEffect,useState } from 'react'
-import './Add.css'
-import { assets } from '../../assets/admin_assets/assets'
-import axios from "axios"
-import { toast } from 'react-toastify'
-import { StoreContext } from '../../../context/StoreContext'
+// Add.js
+import React, { useContext, useState } from 'react';
+import './Add.css';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { StoreContext } from '../../../context/StoreContext';
 
 const Add = () => {
+  const [image, setImage] = useState(false);
+  const [disable, setDisable] = useState(false);
+  const { url, token } = useContext(StoreContext);
+  const [data, setData] = useState({
+    name: '',
+    description: '',
+    price: '',
+    category: 'Pens',
+    discount: '',
+  });
 
-  const [image,setImage]=useState(false);
-  const [disable,setdisable] = useState(false);
-  const { url,token } = useContext(StoreContext);
-    const [data,setData]=useState({
-    name:"",
-    description:"",
-    price:"",
-    category:"Pens",
-    discount:""
-  })
+  const onChangeHandler = (event) => {
+    const { name, value } = event.target;
+    setData((prevData) => ({ ...prevData, [name]: value }));
+  };
 
-  const onChangeHandler=(event)=>{
-    const name=event.target.name;
-    const value=event.target.value;
-    setData(data=>({...data,[name]:value}))
-  }
-
-  const onSubmitHandler=async(event)=>{
+  const onSubmitHandler = async (event) => {
     event.preventDefault();
-    setdisable(true);
+    setDisable(true);
     const formData = new FormData();
     formData.append('name', data.name);
     formData.append('description', data.description);
@@ -34,80 +32,132 @@ const Add = () => {
     formData.append('category', data.category);
     formData.append('image', image);
     formData.append('discount', Number(data.discount));
-    const response=await axios.post(`${url}/api/admin/add`,formData,{headers:{Authorization:`Bearer ${token}`}});
-    if(response.data.success){
-      setData({
-        name:"",
-        description:"",
-        price:"",
-        category:"Pens",
-        discount:""
-      })
-      setImage(false)
-      setdisable(false);
-      toast.success(response.data.message)
+
+    try {
+      const response = await axios.post(`${url}/api/admin/add`, formData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (response.data.success) {
+        setData({
+          name: '',
+          description: '',
+          price: '',
+          category: 'Pens',
+          discount: '',
+        });
+        setImage(false);
+        toast.success(response.data.message);
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      toast.error('An error occurred. Please try again.');
+    } finally {
+      setDisable(false);
     }
-    else{
-      setdisable(false);
-      toast.error(response.data.message)
-    }
-    
-  }
-//   useEffect(()=>{
-// console.log(data)
-//   },[data])
+  };
 
   return (
-    <div>
-      <div className="add">
-        <form className='flex-col' onSubmit={onSubmitHandler}>
-          <div className="add-img-upload flex-col">
-            <p>Upload Image</p>
-            <label htmlFor="image">
-              <img src={image?URL.createObjectURL(image):assets.upload_area} alt="" />
-            </label>
-            <input onChange={(e)=>setImage(e.target.files[0])} type="file" id="image" hidden required />
+    <div className="add-container">
+      <h1>Add <span>Products</span></h1>
+      <p className="subtitle">Add Your Products!</p>
+      <form className="add-form" onSubmit={onSubmitHandler}>
+        <div className="left-section">
+          <div className="input-group">
+            <label>Title:</label>
+            <input
+              type="text"
+              name="name"
+              placeholder="Enter product title"
+              value={data.name}
+              onChange={onChangeHandler}
+              required
+            />
           </div>
-          <div className="add-product-name flex-col">
-            <p>Product name</p>
-            <input onChange={onChangeHandler} value={data.name} type="text" name="name" placeholder='Type here' />
-          </div>
-          <div className="add-product-description flex-col">
-            <p>Product description</p>
-            <textarea onChange={onChangeHandler} value={data.description} name="description" rows="6" placeholder='Write content here' required></textarea>
-          </div>
-          <div className="add-category-price">
-            <div className="add-category flex-col">
-              <p>Product category</p>
-              <select onChange={onChangeHandler} name="category" >
-                <option value="Pens">Pens</option>
-                <option value="Mug">Mug</option>
-                <option value="Diary">Diary</option>
-                <option value="Bottle">Bottle</option>
-                <option value="3-D">3-D printing models</option>
-                <option value="Keychains">Keychains</option>
-                <option value="Mobile-stand">Mobile stand</option>
-                <option value="Pen-stand">Pen stand</option>
-                <option value="Bonsai-plant">Bonsai plant</option>
-                <option value="Monstera-plant">Monstera plant</option>
-                <option value="Bamboo-plant">Bamboo plant</option>
-                <option value="Jade-plant">Jade plant</option>
-              </select>
-            </div>
-            <div className="add-price flex-col">
-              <p>Product price</p>
-              <input onChange={onChangeHandler} value={data.price} type="Number" name="price" placeholder="₹ 20"  />
-            </div>
-          </div>
-          <div className="add-discount ">
-            <p>Discount</p>
-            <input onChange={onChangeHandler} value={data.discount} type="Number" name="discount" placeholder="Percentage"  />
-          </div>
-          <button type="submit" className='add-btn' disabled={disable}>ADD</button>
-        </form>
-      </div>
-    </div>
-  )
-}
 
-export default Add
+          <div className="input-group">
+            <label>Description:</label>
+            <textarea
+              name="description"
+              rows="6"
+              placeholder="Enter Product Description"
+              value={data.description}
+              onChange={onChangeHandler}
+              required
+            ></textarea>
+          </div>
+
+          <div className="input-group">
+            <label>Media:</label>
+            <label htmlFor="image" className="upload-label">
+              {image ? <img src={URL.createObjectURL(image)} alt="Upload Preview" /> : 'Add Media from URL'}
+            </label>
+            <input
+              type="file"
+              id="image"
+              onChange={(e) => setImage(e.target.files[0])}
+              hidden
+              required
+            />
+          </div>
+        </div>
+
+        <div className="right-section">
+          <div className="input-group">
+            <label>Organization:</label>
+            <input
+              type="text"
+              placeholder="Dev Creations and Solutions"
+              disabled
+            />
+          </div>
+
+          <div className="input-group">
+            <label>Discount (%):</label>
+            <input
+              type="text"
+              placeholder="e.g., 10,30"
+              name='discount'
+              value={data.discount}
+              onChange={onChangeHandler}
+            />
+          </div>
+
+          <div className="input-group">
+            <label>Product Type:</label>
+            <select name="category" value={data.category} onChange={onChangeHandler}>
+              <option value="Pens">Pens</option>
+              <option value="Mug">Mug</option>
+              <option value="Diary">Diary</option>
+              <option value="Bottle">Bottle</option>
+              <option value="3-D">3-D printing models</option>
+              <option value="Keychains">Keychains</option>
+              <option value="Mobile-stand">Mobile stand</option>
+              <option value="Pen-stand">Pen stand</option>
+              <option value="Bonsai-plant">Bonsai plant</option>
+              <option value="Monstera-plant">Monstera plant</option>
+              <option value="Bamboo-plant">Bamboo plant</option>
+              <option value="Jade-plant">Jade plant</option>
+            </select>
+          </div>
+
+          <div className="input-group">
+            <label>Price:</label>
+            <input
+              type="number"
+              name="price"
+              placeholder="e.g., 200 Rs"
+              value={data.price}
+              onChange={onChangeHandler}
+              required
+            />
+          </div>
+          <button type="submit" className="add-btn" disabled={disable}>ADD</button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default Add;

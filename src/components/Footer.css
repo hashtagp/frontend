@@ -1,9 +1,13 @@
 /* Footer Styles */
 .footer {
-    background-color: #636466;
+    background-color: black;
     color: black;
     border-radius: 10px;
     margin-top: 20px;
+  }
+
+  .footer * {
+    background-color: black !important;
   }
   
   .footer-container {
@@ -12,13 +16,13 @@
     padding: 20px 30px;
     justify-content: space-evenly;
     padding-top: 0px;
-    background-color: #636466;
+    background-color: black;
     gap: 30px;
     margin:0 auto;
   }
 
   .logo{
-    background-color: #636466;
+    background-color: b;
   }
 
   .footer-logo{
@@ -129,7 +133,7 @@
   border-radius: 25px;
   font-size: 15px;
   font-family: 'Cabin', sans-serif;
-  background-color: #fff;
+  background-color: #f68b20 !important;
   color: black;
   cursor: pointer;
   font-weight: 500;

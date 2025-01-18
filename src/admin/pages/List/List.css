@@ -1,3 +1,19 @@
+.list{
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.list h3{
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+.list h3 span{
+    color: orange;
+}
+
 .list-table-format{
     display: grid;
     grid-template-columns: 0.5fr 2fr 1fr 1fr 0.5fr 1fr;
@@ -21,7 +37,9 @@
 }
 
 .list-category select{
-    border: 2px solid #abcd;
+    border: 2px solid orange;
+    border-radius: 15px;
+    padding: 8px 12px;
 }
 
 @media(max-width:600px){

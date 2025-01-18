@@ -72,7 +72,7 @@ const Orders = () => {
       return (
         <p
           style={{
-            backgroundColor: "green",
+            backgroundColor: "orange",
             color: "white",
             padding: "5px 5px",
             borderRadius: "5px",
@@ -114,7 +114,7 @@ const Orders = () => {
 
   return (
     <div className="order add">
-      <h3>Order Page</h3>
+      <h3>Order <span>Page</span></h3>
       <div className="date-picker-container">
         <label className="Choice">Select Date: </label>
         <DatePicker
@@ -180,10 +180,11 @@ const Orders = () => {
               </>
             )}
             {!order.payment?.status && <p style={{
-            backgroundColor: "red",
+            backgroundColor: "black",
             color: "white",
             padding: "5px 5px",
             borderRadius: "5px",
+            minWidth: "100px",
             fontWeight: "bold",
             textAlign: "center",
             margin: "10px auto",

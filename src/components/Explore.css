@@ -116,12 +116,12 @@
 }
 
 .image:first-child {
-    background-image: url('../assets/home-banner-with-logo.jpg');
+    background-image: url('../assets/home-banner-with-logo.svg');
     clip-path: inset(0 50% 0 0); /* Show the left half initially */
 }
 
 .image:last-child {
-    background-image: url('../assets/home-banner-without-logo.jpg');
+    background-image: url('../assets/home-banner-without-logo.svg');
     clip-path: inset(0 0 0 50%); /* Show the right half initially */
 }
 

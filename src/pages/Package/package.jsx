@@ -73,7 +73,7 @@ const Package = () => {
             month: 'long',
             }) : "TBD"}</span></p>
 
-      <div className="bg-blue-200 p-8 rounded-lg shadow-md mb-8">
+      <div className="bg-white-200 p-4 rounded-lg shadow-md mb-8 border-t-4 border-gray-300">
         <div className="relative flex justify-between items-center">
           <div className="absolute top-4 h-1 bg-orange-500" style={{ width: getLineWidth() }}></div>
           <div className="flex-1 text-center">

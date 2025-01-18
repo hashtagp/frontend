@@ -1,6 +1,6 @@
 .products{
     background-color: #fff;
-    padding: 10px 10px;
+    padding: 0px 0px;
 }
 
 .discount {
@@ -50,6 +50,7 @@
 .product-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr); 
+    gap: 10px;
   }
 
   .product-grid *{

@@ -49,7 +49,7 @@ const List = () => {
   return (
     <div>
       <div className="list add flex-col">
-        <p>Products inventory</p>
+        <h3>Products <span>inventory</span></h3>
         <div className="list-category flex-col mb-2">
           <p>Product category</p>
           <select onChange={onChangeHandler} name="category" >

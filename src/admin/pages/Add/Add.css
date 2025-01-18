@@ -1,57 +1,140 @@
-.add{
-    margin-left: max(5vw,25px);
-    margin-top: 30px;
-    font-size: 16px;
-}
+/* Add.css */
 
-p{
+.add-container {
+    margin: 20px auto;
+    max-width: 1300px;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .add-container h1 {
+    text-align: center !important;
+    text-align: left;
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  .add-container h1 span {
+    color: orange;
+  }
+  
+  .add-container .subtitle {
+    text-align: center;
     margin: 10px 0;
-}
-
-.add form{
-    gap: 20px;
-}
-
-.add-img-upload img{
-    width: 120px;
-}
-
-.add-product-name, .add-product-description{
-    width: max(40%,280px);
-}
-
-.add-product-name input, .add-product-description textarea{
-    padding: 10px;
-    margin-bottom: 10px;
-    padding: 10px;
-    width: 100%;
-    border: 2px solid #aaa;
-}
-
-.add-product-description textarea{
-    height: 100px;
-    resize: none;
-}
-
-.add-category-price{
+    font-size: 1rem;
+    color: #777;
+  }
+  
+  .add-form {
     display: flex;
-    gap: 30px;
-}
-
-.add-category-price select, .add-category-price input, .add-discount input{
-    max-width: 120px;
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 2px solid #e0e0e0;
-}
-
-.add-btn{
-    margin-top: 10px;
-    max-width: 120px;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+  }
+  
+  .left-section {
+    flex: 1;
+    min-width: 500px;
+  }
+  
+  .right-section {
+    flex: 1;
+    min-width: 300px;
+  }
+  
+  .input-group {
+    margin-bottom: 15px;
+  }
+  
+  .input-group label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: #555;
+  }
+  
+  .input-group input, 
+  .input-group textarea, 
+  .input-group select {
     width: 100%;
-    border: none;
-    padding: 10px;
-    background-color: black;
-    color: white;
+    padding: 15px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .input-group textarea {
+    resize: none;
+  }
+  
+  .upload-label {
+    display: block;
+    padding: 15px;
+    background: #f8f8f8;
+    border: 1px dashed #ccc;
+    text-align: center;
+    font-size: 1rem;
+    color: #aaa;
     cursor: pointer;
-}
+  }
+  
+  .upload-label img {
+    width: 100%;
+    max-height: 150px;
+    object-fit: cover;
+  }
+  
+  .add-btn {
+    margin-top: 20px;
+    width: 40%;
+    padding: 5px 2px;
+    font-size: 1.25rem;
+    color: #fff;
+    background-color: orange;
+    font-family: 'Roboto', sans-serif;
+    border-radius: 15px !important;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .right-section .add-btn {
+    align-self: flex-end;
+  }
+  
+  .add-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .add-btn:hover:not(:disabled) {
+    background-color: #e69500;
+  }
+  
+  /* Media Queries */
+  @media (max-width: 1200px) {
+    .left-section {
+      min-width: 400px;
+    }
+  
+    .right-section {
+      min-width: 250px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .add-form {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .left-section, .right-section {
+      min-width: 100%;
+    }
+  
+    .add-btn {
+      align-self: center;
+      width: 80%;
+    }
+  }
+  

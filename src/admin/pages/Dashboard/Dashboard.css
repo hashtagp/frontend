@@ -23,10 +23,13 @@
 /* Header styling */
 .dashboard h2 {
   text-align: center;
-  color: #333;
   margin-bottom: 20px;
-  font-size: 30px;
-  font-weight: 900;
+  font-size: 2rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+.dashboard h2 span{
+  color: orange;
 }
 
 /* Button container and styling */
@@ -53,13 +56,21 @@
   align-items: center;
 }
 
-.dashboard .button-container .filter-buttons > button:hover {
-  background-color: #0056b3;
+.dashboard .button-container .filter-buttons > button{
+  background-color: orange;
+  border-radius: 30px;
 }
 
 .dashboard .button-container .filter-buttons > button:focus {
   outline: none;
   box-shadow: 0 0 4px #007bff;
+}
+
+.dashboard .button-container label{
+  font-size: 1rem;
+  color: #555;
+  font-family: 'Roboto', sans-serif;
+  margin-right: 10px;
 }
 
 /* Date picker label */
@@ -80,6 +91,8 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   width: 200px;
+  border: 2px solid orange;
+  border-radius: 30px;
 }
 
 .react-datepicker__input-container input:focus {

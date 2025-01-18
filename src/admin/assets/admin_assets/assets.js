@@ -7,6 +7,7 @@ import parcel_icon from './parcel_icon.png'
 import dashboard_icon from "./dashboard_icon.png"
 import banner_icon from "./banner_icon.png"
 import list_icon from "./list_icon.png"
+import logout_icon from "./logout_icon.png"
 
 
 export const assets ={
@@ -18,6 +19,7 @@ export const assets ={
     parcel_icon,
     dashboard_icon,
     banner_icon,
-    list_icon
+    list_icon,
+    logout_icon
 }
 
