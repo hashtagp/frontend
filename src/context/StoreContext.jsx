@@ -10,11 +10,38 @@ const StoreContextProvider = (props) => {
   const [token, setToken] = useState("");
   const [value, setValue] = useState(false);
   const [item_list, setItemList] = useState([]);
-  const url = "http://13.60.168.229:5000";
+  const url = "http://localhost:5000";
+  const isAdminRoute = location.pathname.startsWith("/admin");
 
   const handleTokenExpiration = () => {
     toast.error("Session expired. Please log in again.");
     clearToken();
+  };
+
+  const verify = async () => {
+    if (isAdminRoute && token) {
+      try {
+        const response = await axios.get(`${url}/api/admin/verify`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        console.log("Admin verified!!")
+      } catch (error) {
+        console.error("Error during admin verification:", error);
+        if(error.response){
+          if (error.response.status === 401) {
+            console.log("Unauthorized access. Logging out...");
+            // Clear token
+            localStorage.removeItem("token");
+            setToken("");
+          }
+        } else if (error.request) {
+          // This handles cases where no response is received
+          console.log("No response received:", error.request);
+        } else {
+          console.log("Error message:", error.message);
+        }
+      }
+    }
   };
 
   const addToCart = async (item) => {
@@ -112,6 +139,11 @@ const StoreContextProvider = (props) => {
     localStorage.removeItem("token");
     setToken("");
   };
+
+  useEffect(() => {
+    verify();
+  }, [location.pathname, token]);
+  
 
   useEffect(() => {
     async function loadData() {

@@ -34,24 +34,19 @@ import Sidebar from "../src/admin/components/Sidebar/Sidebar.jsx";
 import AdminNavbar from "../src/admin/components/Navbar/AdminNavbar.jsx";
 import Dashboard from "../src/admin/pages/Dashboard/Dashboard.jsx";
 import Banner from "../src/admin/pages/Banner/Banner.jsx";
+import { use } from "react";
 
 function App() {
   const { token,url } = useContext(StoreContext); // Use the token from context
   const location = useLocation(); // Get the current location
 
-  const isAdminRoute = location.pathname.startsWith("/admin");
+  // Check if the current route is an admin route
+  const isAdminRoute = location.pathname.includes("/admin");
 
   useEffect(() => {
-    const verify = async () => {
-    if (isAdminRoute && token) {
-      const response = await axios.get(`${url}/api/admin/verify`, {headers: {Authorization: `Bearer ${token}`}});
-      if (response.status === 401) {
-        localStorage.removeItem("token");
-      }
-    }
-  }
-    verify();
-  }, [location.pathname, token]);
+  }, [token]);
+
+
 
   if (isAdminRoute) {
     return (

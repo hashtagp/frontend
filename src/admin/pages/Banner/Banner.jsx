@@ -13,6 +13,7 @@ const Banner = () => {
     const [data,setData]=useState({
     name:"",
   })
+  const [bannerList,setBannerList]=useState([])
 
   const onChangeHandler=(event)=>{
     const name=event.target.name;
@@ -39,10 +40,35 @@ const Banner = () => {
       setdisable(false)
       toast.error(response.data.message)
     }
-    
   }
 
+  const removeBanner=async(id)=>{ 
+    setdisable(true);
+    const response=await axios.delete(`${url}/api/admin/delete/banner/${id}`,{headers:{Authorization:`Bearer ${token}`}});
+    if(response.data.success){
+      setdisable(false);
+      toast.success(response.data.message);
+    }
+    else{
+      setdisable(false);
+      toast.error(response.data.message);
+    }
+  }
+
+
+  useEffect(()=>{
+    const fetchData=async()=>{
+      const response=await axios.get(`${url}/api/admin/get/banner`);
+      if(response.data.success){
+        console.log(response.data.data);
+        setBannerList(response.data.data)
+      }
+    }
+    fetchData();
+  },[url,disable])
+
   return (
+    <div className="banner-container">
     <div className="add-banner">
         <form className='flex-col' onSubmit={onSubmitHandler}>
             <div className="add-banner-img-upload flex-col">
@@ -58,7 +84,26 @@ const Banner = () => {
             </div>
             <button type="submit" className='add-btn' disabled={disable}>SAVE</button>
         </form>
-    </div>            
+    </div>  
+    <br/>
+    <div className="banner-list-table">
+          <div className="list-table-format title">
+            <p>Image</p>
+            <p>Name</p>
+            <p>Action</p>
+          </div>
+          {bannerList.map((banner, index) => {
+              return (
+                <div key={index} className='list-table-format'>
+                  <img src={banner.image} alt="" />
+                  <p>{banner.name}</p>
+                  <p onClick={() => removeBanner(banner._id)} className='cursor' disabled={disable}>Delete</p>
+                </div>
+              )
+            }
+            )}
+        </div>
+      </div>
   )
 }
 
