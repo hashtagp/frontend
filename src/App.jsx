@@ -43,7 +43,7 @@ function App() {
 
   useEffect(() => {
     const verify = async () => {
-    if (location.pathname === "/admin" && token) {
+    if (isAdminRoute && token) {
       const response = await axios.get(`${url}/api/admin/verify`, {headers: {Authorization: `Bearer ${token}`}});
       if (response.status === 401) {
         localStorage.removeItem("token");
