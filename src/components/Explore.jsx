@@ -44,7 +44,7 @@ const Explore = () => {
   }, [showMessage]);
 
   return (
-    <div className='products'>
+    <div className='hero'>
       <div className="main">
         <div className="image-container" id="imageContainer">
           <div className="image" id="image1"></div>

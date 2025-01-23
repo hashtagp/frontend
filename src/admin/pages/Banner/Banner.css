@@ -9,6 +9,7 @@
     box-shadow: 0 0 5px #333;
     padding: 10px;
     height: fit-content;
+    border-radius: 15px;
 }
 
 p{
@@ -70,6 +71,8 @@ p{
 
 .banner-list-table .list-table-format p{
     margin-left: 10px;
+    font-size: 1.25rem;
+    font-family: 'Roboto', sans-serif;
 }
 
 .list-table-format .cursor{
@@ -90,7 +93,7 @@ p{
 
     .add-banner-img-upload img{
         width: 70vw;
-        height: 40vh;
+        height: 20vh;
     }
 
     .banner-list-table .list-table-format img{

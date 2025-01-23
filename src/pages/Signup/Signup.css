@@ -55,6 +55,19 @@
     box-sizing: border-box;
 }
 
+
+.sign-up h1, .sign-in h1{
+    font-family: 'Roboto',sans-serif;
+    font-size: 2rem;
+}
+
+.auth-container hr{
+    height: 2px;
+    width: 80%;
+    background-color: orange;
+    border: none;
+    margin: 20px 0;
+}
 /* Form-container styling */
 .form-container {
     position: relative;

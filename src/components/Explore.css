@@ -11,11 +11,11 @@
     --hover-message-border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.Products {
+.hero {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    padding: 20px;
+    padding: 0px 0px;
     background-color: var(--background-color);
     max-height: 80vh;
 }
@@ -171,7 +171,7 @@
 
 /* Responsive Design */
 @media screen and (max-width: 768px) {
-    .Products {
+    .hero {
         flex-direction: column;
         align-items: center;
     }

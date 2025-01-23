@@ -96,7 +96,7 @@ function Signup() {
         </form>
       </div>
       {isMobile && (
-        <p>OR</p>
+        <hr />
       )}
       <div className="form-container sign-in">
         <form onSubmit={handleLogin}>
