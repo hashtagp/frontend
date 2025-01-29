@@ -35,7 +35,7 @@ marquee {
 .home-container h1 {
   font-size: 2rem;
   font-family: 'Roboto', sans-serif;
-  font-weight: 700;
+  font-weight: 500;
   color: #251B1B;
 }
 
@@ -43,6 +43,7 @@ marquee {
   color: #251B1B;
   font-size: 1rem;
   font-family: 'Roboto', sans-serif;
+  margin-bottom: 10px;
 }
 
 .hampers {

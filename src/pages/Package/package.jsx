@@ -8,6 +8,8 @@ const Package = () => {
   const [order, setOrder] = useState(null);
   const [error, setError] = useState(false);
   const { orderId } = useParams();
+  const [shippingCharge, setShippingCharge] = useState(100);
+  const [salesTax, setSalesTax] = useState(0);
 
   useEffect(() => {
     if (token === "") {
@@ -22,6 +24,10 @@ const Package = () => {
           headers: { Authorization: `Bearer ${token}` }
         });
         setOrder(response.data);
+        const calculatedSalesTax = response.data.items.reduce((total, item) => {
+          return total + (item.gst * item.quantity);
+        }, 0);
+        setSalesTax(calculatedSalesTax);
         console.log("Order fetched:", response.data);
       } catch (error) {
         console.log("Error fetching order:", error);
@@ -138,15 +144,15 @@ const Package = () => {
               <hr className='h-4' />
               <div className="flex justify-between py-2 font-bold">
                 <span>SUBTOTAL</span>
-                <span id="subtotal">Rs {order.totalAmount-400}</span>
+                <span id="subtotal">Rs {order.totalAmount-salesTax-shippingCharge}</span>
               </div>
               <div className="flex justify-between py-2">
                 <span>Shipping</span>
-                <span>Rs {100}</span>
+                <span>Rs {shippingCharge}</span>
               </div>
               <div className="flex justify-between py-2">
                 <span>Sales Tax</span>
-                <span>Rs {300}</span>
+                <span>Rs {salesTax}</span>
               </div>
               <hr className="my-4" />
               <div className="flex justify-between font-bold text-lg">

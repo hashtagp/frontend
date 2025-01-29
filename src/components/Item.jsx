@@ -6,7 +6,7 @@ import add_icon_green from "../assets/add_icon_green.png";
 import remove_icon_red from "../assets/remove_icon_red.png";
 import { useNavigate } from 'react-router-dom';
 
-const Item = ({ id, name, price, image, discount }) => {
+const Item = ({ id, name, price, image, discount, gst }) => {
   const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
   const [disable,setDisable] = useState(false);
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ const Item = ({ id, name, price, image, discount }) => {
     setDisable(false);
   };
 
-  const item = { id, name, price, image, discount  };
+  const item = { id, name, price, image, discount, gst  };
 
   return (
     <div onClick={()=>navigate(`/product/${id}`)} className='product-item'>

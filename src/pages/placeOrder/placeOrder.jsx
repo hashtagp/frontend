@@ -17,6 +17,17 @@ const PlaceOrder = () => {
     phone: ""
   });
 
+  const calculateSalesTax = () => {
+    return Object.keys(cartItems).reduce((total, itemId) => {
+      const item = cartItems[itemId];
+      console.log("Calculating sales tax for item:", item.gst * item.quantity);
+      return total + (item.gst * item.quantity);
+    }, 0);
+  };
+
+  const salesTax = calculateSalesTax();
+  const shippingCharge = 100;
+
   const placeOrder = async (event) => {
     event.preventDefault();
     let orderItems = [];
@@ -32,7 +43,7 @@ const PlaceOrder = () => {
     let orderData = {
       address: data,
       items: orderItems,
-      amount: getTotalCartValue()+400,
+      amount: getTotalCartValue()+shippingCharge+salesTax,
     };
     let response = await axios.post(url + "/api/order/place", orderData, { headers: { Authorization: `Bearer ${token}` } });
     if (response.data.success) {
@@ -119,16 +130,16 @@ const PlaceOrder = () => {
             <hr />
             <div className="cart-total-details flex justify-between py-2">
               <span>Shipping</span>
-              <span>&#8377;100</span>
+              <span>&#8377;{shippingCharge}</span>
             </div>
             <div className="cart-total-details flex justify-between py-2">
               <span>Sales Tax</span>
-              <span>&#8377;300</span>
+              <span>&#8377;{salesTax}</span>
             </div>
             <hr />
             <div className="cart-total-details mt-2 flex justify-between py-2">
               <b>Total</b>
-              <b>&#8377;{getTotalCartValue()+400}</b>
+              <b>&#8377;{getTotalCartValue()+shippingCharge+salesTax}</b>
             </div>
           </div>
           <button type="submit">Payment</button>

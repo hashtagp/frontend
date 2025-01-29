@@ -54,6 +54,7 @@ const StoreContextProvider = (props) => {
         setCartItems((prev) => {
           const newCartItems = { ...prev };
           if (!newCartItems[id]) {
+            console.log("Item not found in cart. Adding new item:", item);
             newCartItems[id] = { ...item, quantity: 1 };
             console.log("Item added to cart:", newCartItems[id]);
           } else {

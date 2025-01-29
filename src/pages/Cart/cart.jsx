@@ -20,9 +20,17 @@ const CartPage = () => {
     }
   }
 
+  const calculateSalesTax = () => {
+    return Object.keys(cartItems).reduce((total, itemId) => {
+      const item = cartItems[itemId];
+      console.log("Calculating sales tax for item:", item.gst * item.quantity);
+      return total + (item.gst * item.quantity);
+    }, 0);
+  };
+
   const subtotal = getTotalCartValue();
   const shipping = subtotal > 0 ? 100 : 0;
-  const salesTax = subtotal > 0 ? 300 : 0;
+  const salesTax = subtotal > 0 ? calculateSalesTax() : 0;
   const estimatedTotal = subtotal + shipping + salesTax;
 
   return (
