@@ -6,6 +6,8 @@ import { StoreContext } from '../context/StoreContext';
 import axios from "axios";
 import { debounce, set } from 'lodash';
 import nav_mobile_logo from "../assets/nav_mobile_logo.svg";
+import profile from "../assets/profile.svg";
+import cart from "../assets/cart.svg";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -113,8 +115,12 @@ const Navbar = () => {
 
           {/* Nav Icons */}
           <div className="nav-icons">
-            <a href="#" className="icon cart" onClick={() => navigate("/cart")}>🛒</a>
-            <a href="#" onClick={handleProfileClick} className="icon profile">👤</a>
+            <a href="#" className="icon cart" onClick={() => navigate("/cart")}>
+              <img src={cart} alt="cart" />
+            </a>
+            <a href="#" onClick={handleProfileClick} className="icon profile">
+            <img src={profile} alt="profile" />
+            </a>
           </div>
 
           {/* Mobile Nav Links (Hamburger Menu) */}

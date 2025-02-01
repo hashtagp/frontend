@@ -116,6 +116,8 @@
   background-color: white;
   font-size: 20px;
   transition: color 0.3s;
+  width: 20px;
+  height: 20px;
 }
 
 .icon:hover {

@@ -43,17 +43,17 @@ const Profile = () => {
         <div className="flex flex-col lg:flex-row space-y-6 lg:space-y-0 lg:space-x-6 items-center justify-center">
           <div className="flex flex-col gap-4 w-full lg:w-2/3">
           {/* Profile Section */}
-            <div className="bg-blue-300 shadow-md rounded-lg p-6 flex flex-col items-center w-full lg:w-1/3 mx-auto">
-              <img src={profile_icon} alt="User Profile" className="rounded-full w-24 h-24 mb-4" />
-              <h2 className="text-lg font-semibold">{user.username}</h2>
+            <div className="shadow-md rounded-lg p-6 flex flex-col items-center w-full lg:w-1/3 mx-auto border-2">
+              <img src={profile_icon} alt="User Profile" className="rounded-full w-50 h-50 mb-4" style={{ border: '4px solid gold' }}/>
+              <h2 className="text-lg font-bold">{user.username}</h2>
               <p className="text-gray-900">{user.email}</p>
             </div>
             {/* Action Buttons Section */}
-            <button className="bg-orange-100 hover:bg-orange-200 text-orange-600 font-medium py-8 px-8 text-center rounded-md shadow-md transition duration-300" onClick={() => navigate("/myOrders")}>Your Orders</button>
-            <button className="bg-orange-100 hover:bg-orange-200 text-orange-600 font-medium py-8 px-8 text-center rounded-md shadow-md transition duration-300">Track Your Order</button>
-            <button className="bg-orange-100 hover:bg-orange-200 text-orange-600 font-medium py-8 px-8 text-center rounded-md shadow-md transition duration-300" onClick={() => navigate("/myOrders")}>Purchase History</button>
-            <a href="/contact" className="bg-orange-100 hover:bg-orange-200 text-orange-600 font-medium py-8 px-8 text-center rounded-md shadow-md transition duration-300">Contact Us</a>
-            <button className="bg-orange-100 hover:bg-orange-200 text-orange-600 font-medium py-8 px-8 text-center rounded-md shadow-md transition duration-300" onClick={logoutHandler}>Logout</button>
+            <button className="hover:bg-orange-200 text-black-600 font-medium py-8 px-8 text-center rounded-md shadow-md transition duration-300" onClick={() => navigate("/myOrders")}>Your Orders</button>
+            <button className="hover:bg-orange-200 text-black-600 font-medium py-8 px-8 text-center rounded-md shadow-md transition duration-300">Track Your Order</button>
+            <button className="hover:bg-orange-200 text-black-600 font-medium py-8 px-8 text-center rounded-md shadow-md transition duration-300" onClick={() => navigate("/myOrders")}>Purchase History</button>
+            <a href="/contact" className="hover:bg-orange-200 text-black-600 font-medium py-8 px-8 text-center rounded-md shadow-md transition duration-300">Contact Us</a>
+            <button className="hover:bg-orange-200 text-black-600 font-medium py-8 px-8 text-center rounded-md shadow-md transition duration-300" onClick={logoutHandler}>Logout</button>
           </div>
         </div>
       </main>

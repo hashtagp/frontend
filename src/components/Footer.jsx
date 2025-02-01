@@ -89,7 +89,7 @@ const Footer = () => {
       <hr/>
 
       <div className="footer-bottom">
-        <p>© 2024 DevCreations and Solutions</p>
+        <p>© {new Date().getFullYear()} Dev Creations and Solutions. All Rights Reserved.</p>
       </div>
     </footer>
   );
