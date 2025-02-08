@@ -27,7 +27,7 @@ const List = () => {
     }
   }
 
-  const removeFood = async (foodId) => {
+  const removeItem = async (foodId) => {
     setDisable(true);
     const response = await axios.post(`${url}/api/admin/delete`, { id: foodId }, { headers: { Authorization: `Bearer ${token}` } });
     await fetchlist();
@@ -86,7 +86,7 @@ const List = () => {
                   <p>{item.category}</p>
                   <p>{item.price}</p>
                   <p>{item.discount}&nbsp;</p>
-                  <p onClick={() => removeFood(item._id)} className='cursor' disabled={disable}>Delete</p>
+                  <p onClick={() => removeItem(item._id)} className='cursor' disabled={disable}>Delete</p>
                 </div>
               )
             }
