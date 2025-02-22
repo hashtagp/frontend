@@ -54,7 +54,7 @@ const Explore = () => {
               onMouseEnter={() => setShowMessage(false)}
             >
               <h1>Move Me</h1>
-              <p>Hover to see the magic</p>
+              <p>Hover to see the magic of the product</p>
             </div>
           </div>
           <div className="image" id="image2"></div>
