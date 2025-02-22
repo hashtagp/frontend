@@ -8,7 +8,7 @@ import pens from "../../assets/pens-home.jpg";
 import keychains from "../../assets/keychains-home.jpg";
 import dairy from "../../assets/dairy-home.jpg";
 import mobile_stand from "../../assets/phone-stand-home.jpg";
-import pen_stand from "../../assets/pen-stand-home.png";
+import pen_stand from "../../assets/pen-stand-home.jpg";
 import gift_plant from "../../assets/plants-home.jpg";
 import bottle_home from "../../assets/bottle-home.jpg";
 import bamboo_home from "../../assets/bamboo-home.png";
@@ -43,9 +43,9 @@ const Home = () => {
   ];
 
   const reviews = [
-    { name: "Shivaji Shankar", review: "This pen has an elegant and timeless design, making it an excellent gift for professionals or students.The smooth writing experience adds to its charm, and the premium feel makes it a standout gift for special occasions like graduations",color: "F2B980", border: "F68B20" },
-    { name: "Rajkumar", review: "Stylish yet functional, this keychain is both a practical and thoughtful gift. The sturdy build ensures it lasts, while the sleek design adds a touch of elegance. Perfect for gifting as a small token of appreciation or for personalized touches with initials or engravings.", color: "C5F6FF", border: "629AA4" },
-    { name: "Sneha", review: "This pen stand is a great addition to any desk, adding a touch of sophistication and organization. The sleek design and sturdy build make it a perfect gift for professionals or students.", color: "F2CBE7", border: "C36C77" },
+    { name: "Sanjana", review: "This pen has an elegant and timeless design, making it an excellent gift for professionals or students.The smooth writing experience adds to its charm, and the premium feel makes it a standout gift for special occasions like graduations",color: "F2B980", border: "F68B20", stars: 3 },
+    { name: "Bhumika", review: "Stylish yet functional, this keychain is both a practical and thoughtful gift. The sturdy build ensures it lasts, while the sleek design adds a touch of elegance. Perfect for gifting as a small token of appreciation or for personalized touches with initials or engravings.", color: "C5F6FF", border: "629AA4", stars: 4 },
+    { name: "Nikhil", review: "This pen stand is a great addition to any desk, adding a touch of sophistication and organization. The sleek design and sturdy build make it a perfect gift for professionals or students.", color: "F2CBE7", border: "C36C77", stars: 3 },
   ];
 
   const fetchBanner = async () => {
@@ -61,6 +61,10 @@ const Home = () => {
   useEffect(() => {
     fetchBanner();
   }, []);
+
+  const renderStars = (stars) => {
+    return Array(stars).fill('★').join('');
+  };
 
   return (
     <>
@@ -184,7 +188,7 @@ const Home = () => {
                 <h4>{item.name}</h4>
                 <p>{item.review}</p>
                 <div className="stars">
-                  &#11088;&#11088;&#11088;&#11088;&#11088;
+                  {renderStars(item.stars)}
                 </div>
               </div>
             ))}
