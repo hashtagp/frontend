@@ -11,7 +11,7 @@ const StoreContextProvider = (props) => {
   const [token, setToken] = useState("");
   const [value, setValue] = useState(false);
   const [item_list, setItemList] = useState([]);
-  const url = "http://localhost:5000";
+  const url = "http://51.20.72.93:9876";
   const isAdminRoute = location.pathname.startsWith("/admin");
 
   const handleTokenExpiration = () => {
