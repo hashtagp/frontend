@@ -20,7 +20,7 @@ const Contact = () => {
             <li>
               <i className="fa-solid fa-envelope"></i>
               <p>
-                <a href="mailto:devcreationsblr@gmail.com">devcreationsblr@gmail.com</a>
+                <a href="mailto:info@devcreations.com">info@devcreations.com</a>
                 <br />
                 Response Time: Within 24 hours
               </p>

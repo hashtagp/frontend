@@ -1,7 +1,8 @@
 import React from "react";
 import "./Footer.css";
 import logo from "../assets/footer_logo.png"; // Replace with your logo path
-import { FaInstagram, FaLinkedin, FaYoutube } from "react-icons/fa";
+import { FaInstagram, FaLinkedin, FaWhatsapp, FaFacebook } from "react-icons/fa";
+import { FaXTwitter } from 'react-icons/fa6';
 import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
@@ -78,9 +79,11 @@ const Footer = () => {
           <h3>CONTACTS</h3>
           <p>+91 73378 40612</p>
           <ul className="social-links">
-            <li><FaLinkedin /></li>
-            <li><FaInstagram /></li>
-            <li><FaYoutube /></li>
+            <li><a href="https://www.linkedin.com/company/dev-creations-and-solutions/"><FaLinkedin /></a></li>
+            <li><a href="https://www.instagram.com/dev_creationsblr/profilecard/?igsh=Y3Z6b2Y0cm9yd3hx"><FaInstagram /></a></li>
+            <li><a href="https://wa.me/+919945250080"><FaWhatsapp /></a></li>
+            <li><a href="https://www.facebook.com/profile.php?id=61569558881823&mibextid=ZbWKwL"><FaFacebook /></a></li>
+            <li><a href="https://x.com/DevCreations0?t=NAdYpGZ_Y8zR-UUWdPM0nw&s=08"><FaXTwitter /></a></li>
           </ul>
         </div>
         </div>

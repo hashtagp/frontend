@@ -76,15 +76,6 @@ function Signup() {
       <div className="form-container sign-up">
         <form onSubmit={handleSignup}>
           <h1>Create Account</h1>
-          <div className="social-media">
-            <ul>
-              <li><a href="#"><i className="fab fa-facebook-f"></i></a></li>
-              <li><a href="https://www.instagram.com/dev_creationsblr/"><i className="fab fa-instagram"></i></a></li>
-              <li><a href="#"><i className="fab fa-twitter"></i></a></li>
-              <li><a href="https://www.linkedin.com/company/dev-creations-and-solutions/"><i className="fab fa-linkedin-in"></i></a></li>
-            </ul>
-          </div>
-          <span>or use your email for registration</span>
           <input type="text" placeholder="Name" value={username} onChange={(e) => setUsername(e.target.value)} required />
           <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
           <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
@@ -101,15 +92,6 @@ function Signup() {
       <div className="form-container sign-in">
         <form onSubmit={handleLogin}>
           <h1>Sign In</h1>
-          <div className="social-media">
-            <ul>
-              <li><a href="#"><i className="fab fa-facebook-f"></i></a></li>
-              <li><a href="https://www.instagram.com/dev_creationsblr/"><i className="fab fa-instagram"></i></a></li>
-              <li><a href="#"><i className="fab fa-twitter"></i></a></li>
-              <li><a href="https://www.linkedin.com/company/dev-creations-and-solutions/"><i className="fab fa-linkedin-in"></i></a></li>
-            </ul>
-          </div>
-          <span>or use your email for login</span>
           <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} required />
           <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
           <a href="#">Forget Your Password?</a>
