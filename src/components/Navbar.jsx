@@ -14,7 +14,7 @@ const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [menu, setMenu] = useState("");
-  const { url } = useContext(StoreContext);
+  const { url, getTotalCartValue } = useContext(StoreContext);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -117,6 +117,7 @@ const Navbar = () => {
           <div className="nav-icons">
             <a href="#" className="icon cart" onClick={() => navigate("/cart")}>
               <img src={cart} alt="cart" />
+              {getTotalCartValue() > 0 && <span className="cart-notification-dot"></span>}
             </a>
             <a href="#" onClick={handleProfileClick} className="icon profile">
             <img src={profile} alt="profile" />

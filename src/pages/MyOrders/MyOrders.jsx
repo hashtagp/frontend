@@ -48,8 +48,16 @@ const MyOrders = () => {
               ))}</p>
               <p>&#8377;{order.totalAmount}.00</p>
               <p>Items: {order.items.length}</p>
-              <p><span>&#x25cf;</span><b>{order.status}</b></p>
-              {order.payment?.status ? (
+              <p>
+                <span>&#x25cf;</span><b>{order.status}</b>
+                {/* Only show badge for COD or successful online payments */}
+                {(order.payment?.method === 'cod' || order.payment?.status) && (
+                  <span className={`payment-badge ${order.payment?.method === 'cod' ? 'cod' : 'paid'}`}>
+                    {order.payment?.method === 'cod' ? 'Cash on Delivery' : 'Paid Online'}
+                  </span>
+                )}
+              </p>
+              {(order.payment?.method === 'cod' || order.payment?.status) ? (
                 <button onClick={() => navigate(`/package/${order._id}`)}>Track order</button>
               ) : (
                 <button>Payment failed</button>

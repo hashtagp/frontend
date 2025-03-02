@@ -5,16 +5,25 @@ import { useNavigate } from 'react-router-dom';
 const CartPage = () => {
   const { cartItems, token, addToCart, removeFromCart, getTotalCartValue } = useContext(StoreContext);
   const navigate = useNavigate();
+  const [minCartError, setMinCartError] = useState(false);
+  
+  // Minimum cart value required for checkout
+  const MIN_CART_VALUE = 1000;
 
   const calculateTotal = (quantity, price) => quantity * price;
 
   const redirect = () => {
     if (!token) {
-      console.log("Token not found. Redirecting to cart page.");
-      navigate('/cart');
+      console.log("Token not found. Redirecting to login page.");
+      navigate('/login');
     } else if (getTotalCartValue() === 0) {
-      console.log("Cart is empty. Redirecting to cart page.");
+      console.log("Cart is empty. Staying on cart page.");
       navigate('/cart');
+    } else if (getTotalCartValue() < MIN_CART_VALUE) {
+      console.log(`Cart value below minimum (₹${MIN_CART_VALUE}). Showing error.`);
+      setMinCartError(true);
+      // Hide the error message after 3 seconds
+      setTimeout(() => setMinCartError(false), 3000);
     } else {
       navigate('/placeOrder');
     }
@@ -23,15 +32,15 @@ const CartPage = () => {
   const calculateSalesTax = () => {
     return Object.keys(cartItems).reduce((total, itemId) => {
       const item = cartItems[itemId];
-      console.log("Calculating sales tax for item:", item.gst * item.quantity);
       return total + (item.gst * item.quantity);
     }, 0);
   };
 
   const subtotal = getTotalCartValue();
-  const shipping = subtotal > 0 ? 100 : 0;
+  // Remove shipping charge calculation from here
   const salesTax = subtotal > 0 ? calculateSalesTax() : 0;
-  const estimatedTotal = subtotal + shipping + salesTax;
+  // Update estimated total to exclude shipping
+  const estimatedTotal = subtotal + salesTax;
 
   return (
     <div className="bg-white">
@@ -43,7 +52,7 @@ const CartPage = () => {
         {Object.keys(cartItems).length === 0 ? (
           <div className="text-center">
             <h2 className="text-xl font-bold mb-4">No items added</h2>
-            <button className="mt-4 py-2 px-4 bg-black text-white rounded-lg hover:bg-gray-800" onClick={() => navigate('/shop')}>Shop Now</button>
+            <button className="mt-4 py-2 px-4 bg-black text-white rounded-lg hover:bg-gray-800" onClick={() => navigate('/products')}>Shop Now</button>
           </div>
         ) : (
           <div className="flex flex-col lg:flex-row gap-8">
@@ -82,7 +91,7 @@ const CartPage = () => {
               </div>
               <div className="flex justify-between py-2">
                 <span>Shipping</span>
-                <span>Rs {shipping}</span>
+                <span className="text-gray-600 italic">Calculated at checkout</span>
               </div>
               <div className="flex justify-between py-2">
                 <span>Sales Tax</span>
@@ -93,7 +102,32 @@ const CartPage = () => {
                 <span>TOTAL:</span>
                 <span id="estimated-total">Rs {estimatedTotal}</span>
               </div>
-              <button className="w-full mt-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-gray-800" onClick={() => redirect()}>CHECKOUT</button>
+              <div className="text-gray-500 text-xs mt-1 mb-3 text-right">
+                *Final total will include shipping charges
+              </div>
+              
+              {/* Minimum order requirement notice */}
+              <div className={`text-sm mt-2 mb-2 ${subtotal >= MIN_CART_VALUE ? 'text-green-600' : 'text-gray-600'}`}>
+                {subtotal >= MIN_CART_VALUE 
+                  ? '✅ Minimum order value met' 
+                  : `Minimum order: ₹${MIN_CART_VALUE} (₹${MIN_CART_VALUE - subtotal} more needed)`}
+              </div>
+              
+              <button 
+                className={`w-full mt-2 py-2 text-white rounded-lg ${subtotal >= MIN_CART_VALUE 
+                  ? 'bg-orange-500 hover:bg-gray-800' 
+                  : 'bg-gray-400 cursor-not-allowed'}`} 
+                onClick={() => redirect()}
+              >
+                CHECKOUT
+              </button>
+              
+              {/* Error message if minimum not met */}
+              {minCartError && (
+                <div className="text-red-500 text-sm mt-2 text-center animate-pulse">
+                  Please add items worth ₹{MIN_CART_VALUE - subtotal} more to proceed to checkout.
+                </div>
+              )}
             </div>
           </div>
         )}

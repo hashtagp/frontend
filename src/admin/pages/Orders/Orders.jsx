@@ -112,6 +112,22 @@ const Orders = () => {
     return null; // If no dates, return nothing
   };
 
+  // Function to determine payment status display text
+  const getPaymentStatusText = (order) => {
+    if (!order.payment) return "Unknown";
+    
+    if (order.payment.method === 'cod') {
+      return "Cash on Delivery";
+    }
+    
+    return order.payment.status ? "Paid Online" : "Payment Failed";
+  };
+
+  // Function to check if order can be processed (either COD or paid online)
+  const canProcessOrder = (order) => {
+    return order.payment?.method === 'cod' || order.payment?.status;
+  };
+
   return (
     <div className="order add">
       <h3>Order <span>Page</span></h3>
@@ -154,13 +170,10 @@ const Orders = () => {
             <p>Items: {order.items.length}</p>
             <p>&#8377;{order.totalAmount}</p>
             <p>
-              Payment:{" "}
-              {order.payment?.status
-                ? `Paid (${order.payment.method})`
-                : "Failed"}
+              Payment: {getPaymentStatusText(order)}
             </p>
             <p>Order Date: {new Date(order.orderDate).toLocaleDateString()}</p>
-            {order.payment?.status && (
+            {canProcessOrder(order) && (
               <>
                 {order.estimatedDate && (
                   <p>
@@ -179,17 +192,17 @@ const Orders = () => {
                 {getStatusOptions(order)}
               </>
             )}
-            {!order.payment?.status && <p style={{
-            backgroundColor: "black",
-            color: "white",
-            padding: "5px 5px",
-            borderRadius: "5px",
-            minWidth: "100px",
-            fontWeight: "bold",
-            textAlign: "center",
-            margin: "10px auto",
-            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-          }}>Order Failed</p>}
+            {!canProcessOrder(order) && <p style={{
+              backgroundColor: "black",
+              color: "white",
+              padding: "5px 5px",
+              borderRadius: "5px",
+              minWidth: "100px",
+              fontWeight: "bold",
+              textAlign: "center",
+              margin: "10px auto",
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+            }}>Order Failed</p>}
           </div>
         ))}
       </div>

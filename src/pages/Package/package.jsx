@@ -140,26 +140,36 @@ const Package = () => {
         </div>
 
         <div className="w-full lg:w-1/3 bg-white-200 p-6 rounded-lg shadow-md border-t-4 border-gray-300">
-        <h2 className="text-xl font-bold mb-4">Order details</h2>
-              <hr className='h-4' />
-              <div className="flex justify-between py-2 font-bold">
-                <span>SUBTOTAL</span>
-                <span id="subtotal">Rs {order.totalAmount-salesTax-shippingCharge}</span>
+          <h2 className="text-xl font-bold mb-4">Order details</h2>
+          <hr className='h-4' />
+          <div className="flex justify-between py-2 font-bold">
+            <span>SUBTOTAL</span>
+            <span id="subtotal">Rs {order.itemTotal}</span>
+          </div>
+          <div className="flex justify-between py-2">
+            <span>Shipping</span>
+          <span>Rs {order.shippingCharge}</span>
+          </div>
+          <div className="flex justify-between py-2">
+            <span>Sales Tax</span>
+            <span>Rs {order.salesTax}</span>
+          </div>
+          <hr className="my-4" />
+          <div className="flex justify-between font-bold text-lg">
+            <span>TOTAL:</span>
+            <span id="estimated-total">Rs {order.totalAmount}</span>
+          </div>
+          <div className="font-semibold text-lg mt-8">Payment status: {order.payment.       status ? "Paid" : "Failed"}</div> {/* Shipping + Sales Tax */}
+  
+          {/* Display customization details if they exist */}
+          {order.customization && order.customization.required && (
+            <div className="mt-8">
+              <h3 className="font-semibold text-lg mb-2">Customization Details</h3>
+              <div className="bg-gray-50 p-3 rounded-md border border-gray-200">
+                <p className="text-gray-800 whitespace-pre-wrap">{order.customization.        details}</p>
               </div>
-              <div className="flex justify-between py-2">
-                <span>Shipping</span>
-                <span>Rs {shippingCharge}</span>
-              </div>
-              <div className="flex justify-between py-2">
-                <span>Sales Tax</span>
-                <span>Rs {salesTax}</span>
-              </div>
-              <hr className="my-4" />
-              <div className="flex justify-between font-bold text-lg">
-                <span>TOTAL:</span>
-                <span id="estimated-total">Rs {order.totalAmount}</span>
-              </div>
-          <div className="font-semibold text-lg mt-8">Payment status: {order.payment.status ? "Paid" : "Failed"}</div> {/* Shipping + Sales Tax */}
+            </div>
+          )}
         </div>
       </div>
     </div>

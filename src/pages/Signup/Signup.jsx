@@ -8,11 +8,16 @@ import { StoreContext } from '../../context/StoreContext';
 function Signup() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
   const [isActive, setIsActive] = useState(false);
+  // Original variables for signup
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [disable,setDisable] = useState(false);
+  // New variables for signin
+  const [signinUsername, setSigninUsername] = useState('');
+  const [signinPassword, setSigninPassword] = useState('');
+  const [signupError, setSignupError] = useState('');
+  const [loginError, setLoginError] = useState('');
+  const [disable, setDisable] = useState(false);
   const { url, setToken } = useContext(StoreContext);
   const navigate = useNavigate();
 
@@ -29,45 +34,57 @@ function Signup() {
 
   const handleSignInClick = () => {
     setIsActive(false);
+    setSignupError('');
+    setLoginError('');
   };
 
   const handleSignUpClick = () => {
     setIsActive(true);
+    setSignupError('');
+    setLoginError('');
   };
 
   const handleSignup = async (e) => {
     e.preventDefault();
     setDisable(true);
+    setSignupError('');
     try {
       const response = await axios.post(`${url}/api/auth/register`, { username, email, password });
+      if (response.data.success === false) {
+        setSignupError(response.data.message);
+        setDisable(false);
+        return;
+      }
       setToken(response.data.accessToken);
       localStorage.setItem('token', response.data.accessToken);
-      setError('');
       setDisable(false);
       navigate('/');
     } catch (error) {
-      setError(error.message);
+      setSignupError(error.response?.data?.message || 'An error occurred during registration');
       setDisable(false);
       console.error('There was an error registering the user!', error);
-      alert('Registration failed');
     }
   };
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setDisable(true);
+    setLoginError('');
     try {
-      const response = await axios.post(`${url}/api/auth/login`, { username, password });
+      const response = await axios.post(`${url}/api/auth/login`, { username: signinUsername, password: signinPassword });
+      if (response.data.success === false) {
+        setLoginError(response.data.message);
+        setDisable(false);
+        return;
+      }
       setToken(response.data.accessToken);
       localStorage.setItem('token', response.data.accessToken);
-      setError('');
       setDisable(false);
       navigate('/');
     } catch (error) {
-      setError(error.message);
+      setLoginError(error.response?.data?.message || 'An error occurred during login');
       setDisable(false);
       console.error('There was an error logging in the user!', error);
-      alert('Login failed');
     }
   };
 
@@ -76,6 +93,7 @@ function Signup() {
       <div className="form-container sign-up">
         <form onSubmit={handleSignup}>
           <h1>Create Account</h1>
+          {signupError && <div className="error-message" style={{ color: 'red', margin: '10px 0' }}>{signupError}</div>}
           <input type="text" placeholder="Name" value={username} onChange={(e) => setUsername(e.target.value)} required />
           <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
           <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
@@ -92,8 +110,9 @@ function Signup() {
       <div className="form-container sign-in">
         <form onSubmit={handleLogin}>
           <h1>Sign In</h1>
-          <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} required />
-          <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+          {loginError && <div className="error-message" style={{ color: 'red', margin: '10px 0' }}>{loginError}</div>}
+          <input type="text" placeholder="Username" value={signinUsername} onChange={(e) => setSigninUsername(e.target.value)} required />
+          <input type="password" placeholder="Password" value={signinPassword} onChange={(e) => setSigninPassword(e.target.value)} required />
           <a href="#">Forget Your Password?</a>
           <button type="submit" disabled={disable}>Sign In</button>
         </form>

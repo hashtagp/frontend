@@ -89,3 +89,46 @@
         padding: 2vw 4vw;
     }
 }
+
+/* Add to MyOrders.css */
+.payment-badge {
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 12px;
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+  
+  .payment-badge.cod {
+    background-color: #ffd166;
+    color: #7d6400;
+  }
+  
+  .payment-badge.paid {
+    background-color: #8aecc5;
+    color: #1b6e41;
+  }
+  
+  .payment-badge.failed {
+    background-color: #ffadb9;
+    color: #a12a40;
+  }
+  
+  .order-status {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .order-status.confirmed span {
+    color: #4caf50;
+  }
+  
+  .order-status.pending span {
+    color: #ff9800;
+  }
+  
+  .payment-failed {
+    background-color: #e57373 !important;
+  }

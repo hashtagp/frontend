@@ -1,13 +1,37 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import "./Footer.css";
 import logo from "../assets/footer_logo.png"; // Replace with your logo path
 import { FaInstagram, FaLinkedin, FaWhatsapp, FaFacebook } from "react-icons/fa";
 import { FaXTwitter } from 'react-icons/fa6';
 import { useNavigate } from "react-router-dom";
+import { StoreContext } from "../context/StoreContext";
+import axios from "axios";
 
 const Footer = () => {
-
   const navigate = useNavigate();
+  const { url } = useContext(StoreContext);
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState({ loading: false, success: false, error: null });
+
+  const handleSubmit = async () => {
+    // Basic email validation
+    if (!email || !/\S+@\S+\.\S+/.test(email)) {
+      setStatus({ loading: false, success: false, error: "Please enter a valid email address." });
+      return;
+    }
+    
+    try {
+      setStatus({ loading: true, success: false, error: null });
+      
+      await axios.post(url+'/api/users/inquiry', { email });
+      
+      setStatus({ loading: false, success: true, error: null });
+      setEmail(""); // Clear the input after successful submission
+    } catch (error) {
+      console.error("Error submitting inquiry:", error);
+      setStatus({ loading: false, success: false, error: "Failed to submit. Please try again." });
+    }
+  };
 
   return (
     <footer className="footer">
@@ -25,11 +49,24 @@ const Footer = () => {
           <input
               type="email"
               placeholder="Your E-Mail"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="submit-container">
-          <button>Submit</button>
-          <p>We will get back to you soon !!</p>
+          <button 
+            onClick={handleSubmit}
+            disabled={status.loading}
+          >
+            {status.loading ? "Submitting..." : "Submit"}
+          </button>
+          <p>
+            {status.success 
+              ? "Thanks! We'll get back to you soon." 
+              : status.error 
+                ? status.error 
+                : "We will get back to you soon !!"}
+          </p>
           </div>
         </div>
 
