@@ -40,6 +40,11 @@ const Package = () => {
     }
   }, [orderId, token, url]);
 
+  // Check if the order is cancelled
+  const isOrderCancelled = () => {
+    return order?.cancelledDate !== null && order?.cancelledDate !== undefined;
+  };
+
   const getStatusClass = (status) => {
     if (status === 'Confirmed') return 'bg-orange-500';
     if (status === 'Shipped') return 'bg-orange-500';
@@ -48,8 +53,9 @@ const Package = () => {
   };
 
   const getLineWidth = () => {
-    if (order.deliveredDate) return '100%';
-    if (order.shippedDate) return '66%';
+    if (isOrderCancelled()) return '0%'; // No progress bar for cancelled orders
+    if (order?.deliveredDate) return '100%';
+    if (order?.shippedDate) return '66%';
     return '33%';
   };
 
@@ -72,44 +78,72 @@ const Package = () => {
 
   return (
     <div className="package mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-6">TRACK YOUR PACKAGE</h1>
-      <p className="text-gray-600 mb-4">Estimated Delivery: <span className="font-bold">{order.estimatedDate ? new Date(order.estimatedDate).toLocaleDateString('en-US', {
+      <h1 className="text-2xl font-bold mb-6">
+        {isOrderCancelled() ? "CANCELLED ORDER" : "TRACK YOUR PACKAGE"}
+      </h1>
+      <p className="text-gray-600 mb-4">
+        {isOrderCancelled() ? (
+          <span className="text-red-500">This order has been cancelled.</span>
+        ) : (
+          <>Estimated Delivery: <span className="font-bold">{order.estimatedDate ? new Date(order.estimatedDate).toLocaleDateString('en-US', {
             weekday: 'short',
             day: 'numeric',
             month: 'long',
-            }) : "TBD"}</span></p>
+          }) : "TBD"}</span></>
+        )}
+      </p>
 
       <div className="bg-white-200 p-4 rounded-lg shadow-md mb-8 border-t-4 border-gray-300">
-        <div className="relative flex justify-between items-center">
-          <div className="absolute top-4 h-1 bg-orange-500" style={{ width: getLineWidth() }}></div>
-          <div className="flex-1 text-center">
-            <div className={`w-8 h-8 mx-auto rounded-full ${getStatusClass('Confirmed')}`}></div>
-            <p className="mt-2 text-sm font-semibold">Ordered</p>
-            <p className="text-xs text-gray-500">{order.orderDate ? new Date(order.orderDate).toLocaleDateString('en-US', {
-            weekday: 'short',
-            day: 'numeric',
-            month: 'long',
-            }) : "Tue, 10 June"}</p>
+        {isOrderCancelled() ? (
+          <div className="cancelled-order-status">
+            <div className="flex items-center justify-center mb-4">
+              <div className="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </div>
+            </div>
+            <p className="text-xl font-bold text-center text-red-500">Order Cancelled</p>
+            <p className="text-center text-gray-500 mt-2">
+              {order.cancelledDate ? `Cancelled on ${new Date(order.cancelledDate).toLocaleDateString('en-US', {
+                weekday: 'short',
+                day: 'numeric',
+                month: 'long',
+              })}` : ""}
+            </p>
           </div>
-          <div className="flex-1 text-center">
-            {order.shippedDate ? <div className={`w-8 h-8 mx-auto rounded-full ${getStatusClass('Shipped')}`}></div> : <div className="w-8 h-8 mx-auto rounded-full bg-gray-300"></div>}
-            <p className="mt-2 text-sm font-semibold">Shipped</p>
-            <p className="text-xs text-gray-500">{order.shippedDate ? new Date(order.shippedDate).toLocaleDateString('en-US', {
-            weekday: 'short',
-            day: 'numeric',
-            month: 'long',
-            }) : null}</p>
+        ) : (
+          <div className="relative flex justify-between items-center">
+            <div className="absolute top-4 h-1 bg-orange-500" style={{ width: getLineWidth() }}></div>
+            <div className="flex-1 text-center">
+              <div className={`w-8 h-8 mx-auto rounded-full ${getStatusClass('Confirmed')}`}></div>
+              <p className="mt-2 text-sm font-semibold">Ordered</p>
+              <p className="text-xs text-gray-500">{order.orderDate ? new Date(order.orderDate).toLocaleDateString('en-US', {
+                weekday: 'short',
+                day: 'numeric',
+                month: 'long',
+              }) : "Tue, 10 June"}</p>
+            </div>
+            <div className="flex-1 text-center">
+              {order.shippedDate ? <div className={`w-8 h-8 mx-auto rounded-full ${getStatusClass('Shipped')}`}></div> : <div className="w-8 h-8 mx-auto rounded-full bg-gray-300"></div>}
+              <p className="mt-2 text-sm font-semibold">Shipped</p>
+              <p className="text-xs text-gray-500">{order.shippedDate ? new Date(order.shippedDate).toLocaleDateString('en-US', {
+                weekday: 'short',
+                day: 'numeric',
+                month: 'long',
+              }) : null}</p>
+            </div>
+            <div className="flex-1 text-center">
+              {order.deliveredDate ? <div className={`w-8 h-8 mx-auto rounded-full ${getStatusClass('Delivered')}`}></div> : <div className="w-8 h-8 mx-auto rounded-full bg-gray-300"></div>}
+              <p className="mt-2 text-sm font-semibold">Delivered</p>
+              <p className="text-xs text-gray-500">{order.deliveredDate ? new Date(order.deliveredDate).toLocaleDateString('en-US', {
+                weekday: 'short',
+                day: 'numeric',
+                month: 'long',
+              }) : null}</p>
+            </div>
           </div>
-          <div className="flex-1 text-center">
-            {order.deliveredDate ? <div className={`w-8 h-8 mx-auto rounded-full ${getStatusClass('Delivered')}`}></div> : <div className="w-8 h-8 mx-auto rounded-full bg-gray-300"></div>}
-            <p className="mt-2 text-sm font-semibold">Delivered</p>
-            <p className="text-xs text-gray-500">{order.deliveredDate ? new Date(order.deliveredDate).toLocaleDateString('en-US', {
-            weekday: 'short',
-            day: 'numeric',
-            month: 'long',
-            }) : null}</p>
-          </div>
-        </div>
+        )}
       </div>
 
       <div className="flex flex-col lg:flex-row gap-8">
@@ -148,7 +182,7 @@ const Package = () => {
           </div>
           <div className="flex justify-between py-2">
             <span>Shipping</span>
-          <span>Rs {order.shippingCharge}</span>
+            <span>Rs {order.shippingCharge}</span>
           </div>
           <div className="flex justify-between py-2">
             <span>Sales Tax</span>
@@ -159,14 +193,32 @@ const Package = () => {
             <span>TOTAL:</span>
             <span id="estimated-total">Rs {order.totalAmount}</span>
           </div>
-          <div className="font-semibold text-lg mt-8">Payment status: {order.payment.       status ? "Paid" : "Failed"}</div> {/* Shipping + Sales Tax */}
+          <div className="font-semibold text-lg mt-8">
+            Payment: {order.payment.method === 'razorpay' 
+              ? (order.payment.status ? "Paid Online ✓" : "Payment Failed ✗") 
+              : (order.payment.status ? "Cash Paid on Delivery ✓" : "Cash on Delivery (Pending)")}
+          </div>
+          
+          {/* Show cancellation details if order is cancelled */}
+          {isOrderCancelled() && (
+            <div className="mt-4 bg-red-50 border border-red-200 rounded-md p-3">
+              <p className="text-red-800 font-medium">Order Cancelled</p>
+              <p className="text-red-700 text-sm mt-1">
+                This order was cancelled on {new Date(order.cancelledDate).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long', 
+                  day: 'numeric'
+                })}
+              </p>
+            </div>
+          )}
   
           {/* Display customization details if they exist */}
           {order.customization && order.customization.required && (
             <div className="mt-8">
               <h3 className="font-semibold text-lg mb-2">Customization Details</h3>
               <div className="bg-gray-50 p-3 rounded-md border border-gray-200">
-                <p className="text-gray-800 whitespace-pre-wrap">{order.customization.        details}</p>
+                <p className="text-gray-800 whitespace-pre-wrap">{order.customization.details}</p>
               </div>
             </div>
           )}

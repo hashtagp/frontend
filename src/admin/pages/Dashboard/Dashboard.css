@@ -20,6 +20,16 @@
   left: 18%; /* Adjust for sidebar width */
 }
 
+/* Dashboard header with "Add Admin" button */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 20px;
+  margin-bottom: 20px;
+}
+
 /* Header styling */
 .dashboard h2 {
   text-align: center;
@@ -30,6 +40,22 @@
 
 .dashboard h2 span{
   color: orange;
+}
+
+/* Add Admin Button */
+.add-admin-btn {
+  background-color: orange;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.add-admin-btn:hover {
+  background-color: #e69500;
 }
 
 /* Button container and styling */
@@ -117,6 +143,130 @@
   font-size: 16px;
 }
 
+/* Admin Modal Styles */
+.admin-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.admin-modal {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 500px;
+  padding: 0;
+  animation: modalFadeIn 0.3s;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.admin-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.admin-modal-header h2 {
+  font-size: 20px;
+  color: #333;
+  margin: 0;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+}
+
+.close-btn:hover {
+  color: orange;
+}
+
+.admin-modal-body {
+  padding: 20px;
+}
+
+.admin-instructions {
+  color: #666;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.admin-modal .input-group {
+  margin-bottom: 15px;
+}
+
+.admin-modal .input-group label {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.admin-modal .input-group input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.admin-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 15px 20px;
+  border-top: 1px solid #eee;
+}
+
+.cancel-btn, .confirm-btn {
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  background: #f1f1f1;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.confirm-btn {
+  background: orange;
+  color: white;
+  border: none;
+}
+
+.cancel-btn:hover {
+  background: #e5e5e5;
+}
+
+.confirm-btn:hover {
+  background: #e69500;
+}
+
+.confirm-btn:disabled {
+  background: #ffb78a;
+  cursor: not-allowed;
+}
+
 @media screen and (max-width: 768px) {
   .dashboard h2{
     font-size: 24px;
@@ -126,4 +276,22 @@
     flex-direction: column;
   }
   
+  .dashboard-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .admin-modal {
+    width: 95%;
+  }
+}
+
+.add-admin-error-message {
+  background-color: #fdf0f2;
+  border-left: 4px solid #e3342f;
+  color: #e3342f;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  font-size: 14px;
 }

@@ -94,9 +94,9 @@ function Signup() {
         <form onSubmit={handleSignup}>
           <h1>Create Account</h1>
           {signupError && <div className="error-message" style={{ color: 'red', margin: '10px 0' }}>{signupError}</div>}
-          <input type="text" placeholder="Name" value={username} onChange={(e) => setUsername(e.target.value)} required />
+          <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} required />
           <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-          <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+          <input type="password" placeholder="Enter New Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
           <p>By signing in, you agree to our</p>
           <a className='tnc' onClick={() => navigate("/terms-and-conditions")}>*Terms and Conditions</a>
           <br />

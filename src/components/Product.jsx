@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { StoreContext } from '../context/StoreContext';
 
@@ -9,9 +9,10 @@ const Product = () => {
   const [pincode, setPincode] = useState('');
   const [pincodeMessage, setPincodeMessage] = useState('');
   const [isAddedToCart, setIsAddedToCart] = useState(false);
-  const { url, addToCart } = useContext(StoreContext);
+  const { url, addToCart, token } = useContext(StoreContext);
   const [length, setLength] = useState(false);
-  const [disable,setDisable] = useState(false);
+  const [disable, setDisable] = useState(false);
+  const navigate = useNavigate(); // Add navigate hook
 
   const bangalorePincodes = [
     // Bangalore Urban
@@ -52,10 +53,8 @@ const Product = () => {
     "561411", "561412", "561413", "561414", "561415", "561416", "561417", "561418", "561419", "561420",
     "561421", "561422", "561423", "561424", "561425", "561426", "561427", "561428", "561429", "561430",
     "561431", "561432", "561433", "561434", "561435", "561436", "561437", "561438", "561439", "561440",
-    "561441", "561442", "561443"
+    "561441", "561442", "561443","563101"
   ];   
-  
-  
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -92,6 +91,24 @@ const Product = () => {
     addToCart(productToAdd);
     setIsAddedToCart(true);
     setDisable(false);
+  };
+
+  // New Buy Now handler
+  const handleBuyNow = () => {
+    setDisable(true);
+    if(token){
+    const productToAdd = { ...product, id: product._id };
+    
+    // Navigate to place order with just this product
+    navigate('/placeOrder', { 
+      state: { 
+        buyNowItem: productToAdd,
+        isBuyNow: true
+      } 
+    });
+  }else{
+    navigate('/signup');
+  }
   };
 
   if (!product) {
@@ -136,8 +153,12 @@ const Product = () => {
             >
               {isAddedToCart ? 'Add More...' : 'Add to Cart'}
             </button>
-            {/* Buy Now Button */}
-            <button className="py-2 bg-orange-400 hover:bg-orange-500 rounded-2xl w-full font-semibold text-white" disabled={disable}>
+            {/* Buy Now Button with onClick handler */}
+            <button 
+              onClick={handleBuyNow}
+              className="py-2 bg-orange-400 hover:bg-orange-500 rounded-2xl w-full font-semibold text-white"
+              disabled={disable}
+            >
               Buy Now
             </button>
           </div>
@@ -169,7 +190,7 @@ const Product = () => {
               <i className="fa-solid fa-car-side"></i><span>Home delivery within 10 days or less</span>
             </div>
             <div className="flex items-center space-x-2 text-gray-700">
-              &#8377;&nbsp;<span>Money back guarantee</span>
+            &#10005;&nbsp;<span>Cancellation within 24 hours only</span>
             </div>
           </div>
           <hr className="h-px my-6 bg-gray-500 border-0 dark:bg-gray-800" />

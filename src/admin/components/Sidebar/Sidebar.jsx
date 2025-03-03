@@ -43,6 +43,11 @@ const Sidebar = () => {
             <p>Banner</p>
             <span>&#10148;</span>
         </NavLink>
+        <NavLink to="/admin/coupon" className={({ isActive }) => isActive ? 'sidebar-option active' : 'sidebar-option'} onClick={() => setActiveRoute('/admin/coupon')}>
+            <img src={assets.banner_icon} alt="" />
+            <p>Coupon</p>
+            <span>&#10148;</span>
+        </NavLink>
         <div className="sidebar-option logout" onClick={() => logoutHandler()}>
             <img src={assets.logout_icon} alt="" />
             <p>Logout</p>

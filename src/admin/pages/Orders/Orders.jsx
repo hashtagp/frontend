@@ -6,11 +6,13 @@ import { assets } from "../../assets/admin_assets/assets";
 import { StoreContext } from "../../../context/StoreContext";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useNavigate } from "react-router-dom";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const { url, token } = useContext(StoreContext);
+  const navigate = useNavigate();
 
   const fetchAllOrders = async (date) => {
     if (!token) {
@@ -67,50 +69,73 @@ const Orders = () => {
   }, [token, url, selectedDate]);
 
   // Function to determine the available options for status based on dates
-  const getStatusOptions = (order) => {
-    if (order.deliveredDate) {
-      return (
-        <p
-          style={{
-            backgroundColor: "orange",
-            color: "white",
-            padding: "5px 5px",
-            borderRadius: "5px",
-            fontWeight: "bold",
-            textAlign: "center",
-            margin: "10px auto",
-            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-          }}
-        >
-          Order Delivered
-        </p>
-      );      
-    }
-    if (order.shippedDate) {
-      return (
-        <select
-          onChange={(event) => statusHandler(event, order._id)}
-          value={order.status}
-        >
-          <option value="status">status</option>
-          <option value="delivered">Delivered</option>
-        </select>
-      ); // If shipped, show only "Delivered"
-    }
-    if (order.orderDate) {
-      return (
-        <select
-          onChange={(event) => statusHandler(event, order._id)}
-          value={order.status}
-        >
-          <option value="status">status</option>
-          <option value="shipped">Shipped</option>
-          <option value="delivered">Delivered</option>
-        </select>
-      ); // If ordered, show "Shipped" and "Delivered"
-    }
-    return null; // If no dates, return nothing
-  };
+const getStatusOptions = (order) => {
+  if (order.cancelledDate) {
+    return (
+      <p
+        style={{
+          backgroundColor: "red",
+          color: "white",
+          padding: "5px 5px",
+          borderRadius: "5px",
+          fontWeight: "bold",
+          textAlign: "center",
+          margin: "10px auto",
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        Order Cancelled
+      </p>
+    );
+  }
+  
+  if (order.deliveredDate) {
+    return (
+      <p
+        style={{
+          backgroundColor: "orange",
+          color: "white",
+          padding: "5px 5px",
+          borderRadius: "5px",
+          fontWeight: "bold",
+          textAlign: "center",
+          margin: "10px auto",
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        Order Delivered
+      </p>
+    );      
+  }
+  
+  if (order.shippedDate) {
+    return (
+      <select
+        onChange={(event) => statusHandler(event, order._id)}
+        value={order.status}
+      >
+        <option value="status">status</option>
+        <option value="delivered">Delivered</option>
+      </select>
+    );
+  }
+  
+  if (order.orderDate) {
+    return (
+      <select
+        onChange={(event) => statusHandler(event, order._id)}
+        value={order.status}
+      >
+        <option value="status">status</option>
+        <option value="shipped">Shipped</option>
+        <option value="delivered">Delivered</option>
+        <option value="cancelled">Cancelled</option>
+      </select>
+    );
+  }
+  
+  return null;
+};
 
   // Function to determine payment status display text
   const getPaymentStatusText = (order) => {
@@ -143,7 +168,7 @@ const Orders = () => {
       <div className="order-list">
         {orders.slice().reverse().map((order, index) => (
           <div key={order._id || index} className="order-item">
-            <img src={assets.parcel_icon} alt="Order Parcel Icon" />
+            <img src={assets.parcel_icon} alt="Order Parcel Icon" onClick={()=> navigate(`/admin/package/${order._id}`)}/>
             <div>
               <p className="order-item-food">
                 {order.items.map((item, idx) => (
@@ -180,6 +205,9 @@ const Orders = () => {
                     Estimated Delivery:{" "}
                     {new Date(order.estimatedDate).toLocaleDateString()}
                   </p>
+                )}
+                {order.cancelledDate && (
+                  <p>Cancelled Date: {new Date(order.cancelledDate).toLocaleDateString()}</p>
                 )}
                 {order.shippedDate && (
                   <p>Shipped Date: {new Date(order.shippedDate).toLocaleDateString()}</p>

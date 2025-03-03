@@ -35,6 +35,7 @@ import AdminNavbar from "../src/admin/components/Navbar/AdminNavbar.jsx";
 import Dashboard from "../src/admin/pages/Dashboard/Dashboard.jsx";
 import Banner from "../src/admin/pages/Banner/Banner.jsx";
 import { use } from "react";
+import Coupon from "./admin/pages/Coupon/Coupon.jsx";
 
 function App() {
   const { token,url } = useContext(StoreContext); // Use the token from context
@@ -59,6 +60,8 @@ function App() {
             <Route path="/admin/list" element={<List />} />
             <Route path="/admin/orders" element={<Orders />} />
             <Route path="/admin/banner" element={<Banner />} />
+            <Route path="/admin/coupon" element={<Coupon />} />
+            <Route path="/admin/package/:orderId" element={<Package />} />
             <Route path="/admin" element={<Dashboard />} />
           </Routes>
         </div>

@@ -17,6 +17,7 @@ import weekOfYear from "dayjs/plugin/weekOfYear";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { StoreContext } from "../../../context/StoreContext";
+import { toast } from 'react-toastify';
 
 ChartJS.register(
   CategoryScale,
@@ -34,6 +35,12 @@ const Dashboard = () => {
   const [filter, setFilter] = useState("daily");
   const [selectedDate, setSelectedDate] = useState(dayjs().toDate());
   const [chartData, setChartData] = useState(null);
+
+  // Admin management states
+  const [showAdminModal, setShowAdminModal] = useState(false);
+  const [adminEmail, setAdminEmail] = useState('');
+  const [processingAdmin, setProcessingAdmin] = useState(false);
+  const [adminError, setAdminError] = useState('');
 
   const { url, token } = useContext(StoreContext);
 
@@ -54,6 +61,40 @@ const Dashboard = () => {
     }
   };
 
+  // Function to add admin with error shown in modal
+  const addAdminHandler = async (e) => {
+    e.preventDefault();
+    if (!adminEmail.trim()) {
+      setAdminError('Please enter an email address');
+      return;
+    }
+    
+    setProcessingAdmin(true);
+    setAdminError(''); // Clear any previous errors
+    
+    try {
+      const response = await axios.post(
+        `${url}/api/admin/promote`,
+        { email: adminEmail },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      
+      if (response.data.success) {
+        toast.success('User has been promoted to admin successfully!');
+        setAdminEmail('');
+        setShowAdminModal(false);
+      } else {
+        // Display error in the modal instead of toast
+        setAdminError(response.data.message || 'Failed to promote user');
+      }
+    } catch (error) {
+      // Display error in the modal instead of toast
+      const errorMsg = error.response?.data?.message || 'User not found or an error occurred';
+      setAdminError(errorMsg);
+    } finally {
+      setProcessingAdmin(false);
+    }
+  };
 
   const processChartData = (orders) => {
     console.log("selectedDate:", selectedDate); 
@@ -64,7 +105,6 @@ const Dashboard = () => {
       setChartData(null);
       return;
     }
-    
 
     // Initialize groupedData with all possible keys
     if (filter === "yearly") {
@@ -91,7 +131,7 @@ const Dashboard = () => {
     }
 
     orders.forEach((order) => {
-      const orderDate = dayjs(order.orderDate); // Use `orderDate` field from the order object
+      const orderDate = dayjs(order.orderDate); 
       let key;
 
       switch (filter) {
@@ -199,11 +239,24 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      <h2>Order <span>Dashboard</span></h2>
+      <div className="dashboard-header">
+        <h2>Order <span>Dashboard</span></h2>
+        <button 
+          type="button" 
+          className="add-admin-btn"
+          onClick={() => {
+            setAdminError(''); // Clear any previous errors
+            setAdminEmail(''); // Reset email input
+            setShowAdminModal(true);
+          }}
+        >
+          Add Admin
+        </button>
+      </div>
 
       <div className="button-container">
-      <label className="Choice">Select Date: </label>
-      <DatePicker
+        <label className="Choice">Select Date: </label>
+        <DatePicker
           selected={selectedDate}
           onChange={(date) => setSelectedDate(date)}
           dateFormat={
@@ -217,10 +270,10 @@ const Dashboard = () => {
           showMonthYearPicker={filter === "monthly"}
         />
         <div className="filter-buttons">
-        <button onClick={() => handleFilterChange("yearly")}>Yearly</button>
-        <button onClick={() => handleFilterChange("monthly")}>Monthly</button>
-        <button onClick={() => handleFilterChange("weekly")}>Weekly</button>
-        <button onClick={() => handleFilterChange("daily")}>Daily</button>
+          <button onClick={() => handleFilterChange("yearly")}>Yearly</button>
+          <button onClick={() => handleFilterChange("monthly")}>Monthly</button>
+          <button onClick={() => handleFilterChange("weekly")}>Weekly</button>
+          <button onClick={() => handleFilterChange("daily")}>Daily</button>
         </div>
       </div>
 
@@ -228,6 +281,71 @@ const Dashboard = () => {
         <Line data={chartData} options={chartOptions} />
       ) : (
         <p>No Data available for the selected date</p>
+      )}
+
+      {/* Admin Modal with error display */}
+      {showAdminModal && (
+        <div className="admin-modal-overlay">
+          <div className="admin-modal">
+            <div className="admin-modal-header">
+              <h2>Add New Admin</h2>
+              <button 
+                type="button" 
+                className="close-btn" 
+                onClick={() => {
+                  setShowAdminModal(false);
+                  setAdminError('');
+                }}
+              >
+                &times;
+              </button>
+            </div>
+            <form onSubmit={addAdminHandler}>
+              <div className="admin-modal-body">
+                <p className="admin-instructions">
+                  Enter the email address of the user you want to promote to admin. 
+                  The user must already be registered in the system.
+                </p>
+                
+                {adminError && (
+                  <div className="add-admin-error-message">
+                    {adminError}
+                  </div>
+                )}
+                
+                <div className="input-group">
+                  <label>User Email:</label>
+                  <input
+                    type="email"
+                    value={adminEmail}
+                    onChange={(e) => setAdminEmail(e.target.value)}
+                    placeholder="Enter user email"
+                    required
+                  />
+                </div>
+              </div>
+              <div className="admin-modal-footer">
+                <button 
+                  type="button" 
+                  className="cancel-btn"
+                  onClick={() => {
+                    setShowAdminModal(false);
+                    setAdminError('');
+                  }}
+                >
+                  Cancel
+                </button>
+                <button 
+                  type="submit" 
+                  className="confirm-btn"
+                  disabled={processingAdmin}
+                >
+                  {processingAdmin ? 'Processing...' : 'Make Admin'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       )}
     </div>
   );
