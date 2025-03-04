@@ -11,7 +11,7 @@ const StoreContextProvider = (props) => {
   const [token, setToken] = useState("");
   const [value, setValue] = useState(false);
   const [item_list, setItemList] = useState([]);
-  const url = "https://backend.devcreationsgifts.com/";
+  const url = "https://backend.devcreationsgifts.com";
   const isAdminRoute = location.pathname.startsWith("/admin");
 
   const handleTokenExpiration = () => {

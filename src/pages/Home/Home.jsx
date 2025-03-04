@@ -18,6 +18,10 @@ import Explore from '../../components/Explore';
 import essentials_hamper from "../../assets/essentials-hampers.png";
 import writing_hampers from "../../assets/writing-hampers.png";
 import drinkset_hampers from "../../assets/drinkset-hampers.png";
+import Combo2 from "../../assets/Combo-2.png";
+import Combo3 from "../../assets/Combo-3.png";
+import Combo4 from "../../assets/Combo-4.png";
+import Combo6 from "../../assets/Combo-6.png";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
@@ -112,7 +116,7 @@ const Home = () => {
         swipeable
         >
           {banner.length === 0 ? (
-            <div>No banners available</div>
+            null
           ) : (
           banner.map((item, index) => (
           <div key={index}>
@@ -165,6 +169,46 @@ const Home = () => {
               }
             })}
           </div>
+
+          {/* Gift Hampers Section */}
+          <div className="gift-hampers">
+            <h2>Gift <span style={{ color: "#FF6600" }}>Hampers</span></h2>
+            <h4>Perfect combinations for every occasion</h4>
+            <div className="hampers-container">
+              <div className="hamper-card" onClick={() => navigate('/products?category=Combo-2')}>
+                <div className="hamper-image-container">
+                  <img src={Combo2} alt="Duo Combo" />
+                </div>
+                <h3>Duo Combo</h3>
+                <p>Perfect pair of complementary items</p>
+              </div>
+              
+              <div className="hamper-card" onClick={() => navigate('/products?category=Combo-3')}>
+                <div className="hamper-image-container">
+                  <img src={Combo3} alt="Triple Treat" />
+                </div>
+                <h3>Triple Treat</h3>
+                <p>Our most popular 3-item gift set</p>
+              </div>
+              
+              <div className="hamper-card" onClick={() => navigate('/products?category=Combo-4')}>
+                <div className="hamper-image-container">
+                  <img src={Combo4} alt="Quad Collection" />
+                </div>
+                <h3>Quad Collection</h3>
+                <p>Premium 4-piece gift hamper</p>
+              </div>
+              
+              <div className="hamper-card" onClick={() => navigate('/products?category=Combo-6')}>
+                <div className="hamper-image-container">
+                  <img src={Combo6} alt="Luxury Bundle" />
+                </div>
+                <h3>Luxury Bundle</h3>
+                <p>Complete 5-item gift experience</p>
+              </div>
+            </div>
+          </div>
+
           <button onClick={() => navigate("/products")}>EXPLORE MORE</button>
         </div>
 

@@ -139,7 +139,10 @@ const Add = () => {
               <option value="Monstera-plant">Monstera plant</option>
               <option value="Bamboo-plant">Bamboo plant</option>
               <option value="Jade-plant">Jade plant</option>
-              <option value="Gift-hampers">Gift Hampers</option>
+              <option value="Combo-2">Combo of 2</option>
+              <option value="Combo-3">Combo of 3</option>
+              <option value="Combo-4">Combo of 4</option>
+              <option value="Combo-5">Combo of 5</option>
             </select>
           </div>
 

@@ -38,8 +38,14 @@ const Item = ({ id, name, price, image, discount, gst }) => {
         <div className="product">
           <p>{name}</p>
         </div>
-        <span><del>{price}</del></span>&nbsp;
-        <a className='product-item-price'>&#8377;{price-discount}</a>
+        {discount > 0 ? (
+          <>
+            <span><del>{price}</del></span>&nbsp;
+            <a className='product-item-price'>&#8377;{price-discount}</a>
+          </>
+        ) : (
+          <a className='product-item-price'>&#8377;{price}</a>
+        )}
       </div>
     </div>
   );

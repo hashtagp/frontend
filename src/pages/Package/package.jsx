@@ -58,6 +58,17 @@ const Package = () => {
     if (order?.shippedDate) return '66%';
     return '33%';
   };
+  
+  // Calculate discounted price for each item
+  const getDiscountedPrice = (item) => {
+    return item.discount ? item.price - item.discount : item.price;
+  };
+  
+  // Calculate item total with discounts
+  const calculateItemTotal = (item) => {
+    const discountedPrice = getDiscountedPrice(item);
+    return discountedPrice * item.quantity;
+  };
 
   if (error) {
     return (
@@ -160,13 +171,16 @@ const Package = () => {
                   <p className="text-sm text-gray-800">COLOUR: {item.color}</p> */}
                 </div>
                 <div className="flex items-center space-x-4">
-                  <span className="font-medium">Rs {item.price}</span>
-                  <div className="flex items-center border rounded">
-                    {/* <button className="px-2 py-1 text-gray-600" onClick={() => updateQuantity(-1, item.price, index)}>-</button> */}
-                    <input id={`quantity-${index}`} type="text" value={`x ${item.quantity}`} className="w-8 text-center border-l border-r" readOnly />
-                    {/* <button className="px-2 py-1 text-gray-600" onClick={() => updateQuantity(1, item.price, index)}>+</button> */}
+                  <div className="flex flex-col items-end">
+                    <span className="font-medium">Rs {getDiscountedPrice(item)}</span>
+                    {item.discount > 0 && (
+                      <span className="text-gray-400 line-through text-sm">Rs {item.price}</span>
+                    )}
                   </div>
-                  <span id={`total-${index}`} className="font-medium">Rs {item.price * item.quantity}</span>
+                  <div className="flex items-center border rounded">
+                    <input id={`quantity-${index}`} type="text" value={`x ${item.quantity}`} className="w-8 text-center border-l border-r" readOnly />
+                  </div>
+                  <span id={`total-${index}`} className="font-medium">Rs {calculateItemTotal(item)}</span>
                 </div>
               </div>
             ))}
@@ -188,6 +202,12 @@ const Package = () => {
             <span>Sales Tax</span>
             <span>Rs {order.salesTax}</span>
           </div>
+          {order.coupon && order.coupon.discountAmount > 0 && (
+              <div className="cart-total-details flex justify-between py-2 coupon-discount">
+                <span>Discount</span>
+                <span>Rs -{order.coupon.discountAmount}</span>
+              </div>
+            )}
           <hr className="my-4" />
           <div className="flex justify-between font-bold text-lg">
             <span>TOTAL:</span>
