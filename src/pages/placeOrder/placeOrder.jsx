@@ -43,6 +43,7 @@ const PlaceOrder = () => {
       item_list.forEach((item) => {
         if (cartItems[item._id] && cartItems[item._id].quantity > 0) {
           let itemInfo = { ...item, quantity: cartItems[item._id].quantity };
+          console.log("Adding item to order:", itemInfo);
           orderItems.push(itemInfo);
         }
       });

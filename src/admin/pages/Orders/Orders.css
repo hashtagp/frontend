@@ -78,3 +78,37 @@
         width: 40px;
     }
 }
+
+/* Download invoice css */
+.download-invoice-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 12px;
+    margin-top: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: inline-block;
+  }
+  
+  .download-invoice-btn:hover {
+    background-color: #3e8e41;
+  }
+
+  .status-select {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+    cursor: pointer;
+    background-color: white;
+    font-size: 12px;
+  }
+  
+  .status-select:focus {
+    outline: none;
+    border-color: #FF6600;
+    box-shadow: 0 0 3px rgba(255, 102, 0, 0.3);
+  }
